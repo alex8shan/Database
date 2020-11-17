@@ -30,12 +30,12 @@ public class AdminDao extends PersonsDao {
 		// Insert into the superclass table first.
 		create(new Persons(admin.getUserName(), admin.getFirstName(), admin.getLastName()));
 		
-		String insertUser = "INSERT INTO Administrator(UserName,LastLogin) VALUES(?,?);";
+		String insertAdministrator = "INSERT INTO Administrator(UserName,LastLogin) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
 			connection = connectionManager.getConnection();
-			insertStmt = connection.prepareStatement(insertUser);
+			insertStmt = connection.prepareStatement(insertAdministrator);
 			
 			insertStmt.setString(1, admin.getUserName());
 			insertStmt.setTimestamp(2, new Timestamp(admin.getLastLogin().getTime()));
