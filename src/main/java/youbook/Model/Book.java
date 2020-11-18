@@ -1,6 +1,6 @@
 package youbook.Model;
 
-public class Books {
+public class Book {
 	int bookId;
 	String title;
 	String publisherName;
@@ -13,21 +13,21 @@ public class Books {
 	 * @param publisherName
 	 * @param publicationYear
 	 */
-	public Books(int bookId, String title, 
-			String publisherName, String publicationYear) {
+	public Book(int bookId, String title,
+	            String publisherName, String publicationYear) {
 		this.bookId = bookId;
 		this.title = title;
 		this.publisherName = publisherName;
 		this.publicationYear = publicationYear;
 	}
 
-	public Books(String title, String publisherName, String publicationYear) {
+	public Book(String title, String publisherName, String publicationYear) {
 		this.title = title;
 		this.publisherName = publisherName;
 		this.publicationYear = publicationYear;
 	}
 
-	public Books(int bookId) {
+	public Book(int bookId) {
 		this.bookId = bookId;
 	}
 
@@ -61,6 +61,15 @@ public class Books {
 
 	public void setPublicationYear(String publicationYear) {
 		this.publicationYear = publicationYear;
-	}	
+	}
 	
+	@Override
+	public String toString() {
+		return "Book{" +
+				"bookId=" + bookId +
+				", title='" + title + '\'' +
+				", publisherName='" + publisherName + '\'' +
+				", publicationYear='" + publicationYear + '\'' +
+				'}';
+	}
 }

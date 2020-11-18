@@ -1,6 +1,6 @@
 package youbook.Model;
 
-public class Authors {
+public class Author {
 	
 	int authorId;
 	String authorName;
@@ -12,20 +12,20 @@ public class Authors {
 	 * @param authorName
 	 * @param bookId
 	 */
-	public Authors(int authorId, String authorName, int bookId) {
+	public Author(int authorId, String authorName, int bookId) {
 		super();
 		this.authorId = authorId;
 		this.authorName = authorName;
 		this.bookId = bookId;
 	}
 
-	public Authors(String authorName, int bookId) {
+	public Author(String authorName, int bookId) {
 		super();
 		this.authorName = authorName;
 		this.bookId = bookId;
 	}
 
-	public Authors(int authorId) {
+	public Author(int authorId) {
 		this.authorId = authorId;
 	}
 

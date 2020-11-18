@@ -1,6 +1,6 @@
 package youbook.dal;
 
-import youbook.Model.Books;
+import youbook.Model.Book;
 import youbook.Model.Rental;
 import youbook.Model.Users;
 
@@ -113,7 +113,7 @@ public class RentalDao {
 			while(results.next()) {
 				Date created =  new Date(results.getTimestamp("Created").getTime());
 				int bookId = results.getInt("BookId");
-				Books book = bookDao.getBookById(bookId);
+				Book book = bookDao.getBookById(bookId);
 				Rental rental = new Rental(book, user, created);
 				rentals.add(rental);
 			}
@@ -137,7 +137,7 @@ public class RentalDao {
 	/**
 	 * Get the all the Rentals of a Book.
 	 */
-	public List<Rental> getRentalsForBook(Books book) throws SQLException {
+	public List<Rental> getRentalsForBook(Book book) throws SQLException {
 		List<Rental> rentals = new ArrayList<Rental>();
 		String selectRentals =
 			"SELECT BookId, UserName, CheckOutDate " +

@@ -4,22 +4,22 @@ import java.util.Date;
 
 public class Rental {
 	
-	protected Books books;
+	protected Book book;
 	protected Users users;
 	protected Date checkOutDate;
 	
-	public Rental(Books books, Users user, Date checkOutDate) {
-		this.books = books;
+	public Rental(Book book, Users user, Date checkOutDate) {
+		this.book = book;
 		this.users = user;
 		this.checkOutDate = checkOutDate;
 	}
 
-	public Books getBook() {
-		return this.books;
+	public Book getBook() {
+		return this.book;
 	}
 
-	public void setBook(Books books) {
-		this.books = books;
+	public void setBook(Book book) {
+		this.book = book;
 	}
 
 	public Users getUser() {

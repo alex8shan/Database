@@ -1,6 +1,6 @@
 package youbook.dal;
 
-import youbook.Model.Persons;
+import youbook.Model.Person;
 import youbook.Model.Users;
 
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class UsersDao extends PersonsDao {
 	 */
 	public Users create(Users user) throws SQLException{
 		// Insert into the superclass table first.
-		create(new Persons(user.getUserName(), user.getFirstName(), user.getLastName()));
+		create(new Person(user.getUserName(), user.getFirstName(), user.getLastName()));
 		
 		String insertUser = "INSERT INTO User(UserName,EmailAddress,PhoneNumber,PaypalID) VALUES(?,?,?,?);";
 		Connection connection = null;

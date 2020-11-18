@@ -1,11 +1,11 @@
 package youbook.Model;
 
 
-public class Subjects {
+public class Subject {
     private String subjectMatter;
-    private Books book;
+    private Book book;
 
-    public Subjects(String subjectMatter, Books book) {
+    public Subject(String subjectMatter, Book book) {
         this.subjectMatter = subjectMatter;
         this.book = book;
     }
@@ -18,11 +18,11 @@ public class Subjects {
         this.subjectMatter = subjectMatter;
     }
 
-    public Books getBook() {
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(Books book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 }

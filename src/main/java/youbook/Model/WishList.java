@@ -2,7 +2,7 @@ package youbook.Model;
 
 public class WishList {
     private int wishlistId;
-    private Books books;
+    private Book book;
     private Users users;
 
     public WishList(int wishlistId) {
@@ -17,12 +17,12 @@ public class WishList {
         this.wishlistId = wishlistId;
     }
 
-    public Books getBook() {
-        return books;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBook(Books book) {
-        this.books = book;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public Users getUser() {

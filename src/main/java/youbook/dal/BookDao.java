@@ -1,6 +1,6 @@
 package youbook.dal;
 
-import youbook.Model.Books;
+import youbook.Model.Book;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,7 +39,7 @@ public class BookDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Books create(Books book) throws SQLException {
+	public Book create(Book book) throws SQLException {
 		String insertRecommendation = "INSERT INTO Book(Title, "
 				+ "  PublisherName, PublicationYear) VALUES(?,?,?);";
 		Connection connection = null;
@@ -83,7 +83,7 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	
-	public Books delete(Books book) throws SQLException {
+	public Book delete(Book book) throws SQLException {
 		String deleteBook = "DELETE FROM Book WHERE BookId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
@@ -112,6 +112,94 @@ public class BookDao {
 		}
 	}
 	
+	public List<Book> getTopBooksByTitle(int bookNum) throws SQLException {
+		String selectBooks =
+				"SELECT Book.BookId AS BookId, "
+						+ " Title, PublisherName, PublicationYear "
+						+ "FROM Book order by Title limit ?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		
+		List<Book> bookList =
+				new ArrayList<Book>();
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectBooks);
+			selectStmt.setInt(1, bookNum);
+			results = selectStmt.executeQuery();
+			
+			while(results.next()) {
+				int bookId = results.getInt("BookId");
+				String title = results.getString("Title");
+				String resultPublisherName = results.getString("PublisherName");
+				String resPublicationYear = results.getString("PublicationYear");
+				
+				Book book = new Book(bookId, title,
+						resultPublisherName, resPublicationYear );
+				bookList.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return bookList;
+	}
+	
+	public List<Book> getBooksByTitle(String bookTitle) throws SQLException {
+		String selectBooks =
+				"SELECT Book.BookId AS BookId, "
+						+ " Title, PublisherName, PublicationYear "
+						+ "FROM Book where Title = ?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		
+		List<Book> bookList =
+				new ArrayList<Book>();
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectBooks);
+			selectStmt.setString(1, bookTitle);
+			results = selectStmt.executeQuery();
+			
+			while(results.next()) {
+				int bookId = results.getInt("BookId");
+				String title = results.getString("Title");
+				String resultPublisherName = results.getString("PublisherName");
+				String resPublicationYear = results.getString("PublicationYear");
+				
+				Book book = new Book(bookId, title,
+						resultPublisherName, resPublicationYear );
+				bookList.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return bookList;
+	}
+	
 	/**
 	 * search a book by id
 	 * @param bookId
@@ -119,7 +207,7 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	
-	public Books getBookById(int bookId) throws SQLException {
+	public Book getBookById(int bookId) throws SQLException {
 		String selectBooks =
 			"SELECT Book.BookId AS BookId, "
 			+ " Title, PublisherName, PublicationYear "
@@ -140,8 +228,8 @@ public class BookDao {
 				String publisherName = results.getString("PublisherName");
 				String publicationYear = results.getString("PublicationYear");
 				
-				Books book = 
-						new Books(resultBookId, 
+				Book book =
+						new Book(resultBookId,
 								title, publisherName, publicationYear );
 				return book;
 			}
@@ -168,7 +256,7 @@ public class BookDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Books> getBookByPublicationYear
+	public List<Book> getBookByPublicationYear
 	(String publicationYear)throws SQLException {
 		String selectBooks =
 			"SELECT Book.PublicationYear AS PublicationYear, BookId, "
@@ -177,8 +265,8 @@ public class BookDao {
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
-		List<Books> bookList = 
-				new ArrayList<Books>();
+		List<Book> bookList =
+				new ArrayList<Book>();
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectBooks);
@@ -191,7 +279,7 @@ public class BookDao {
 				String resultPublisherName = results.getString("PublisherName");
 				String resPublicationYear = results.getString("PublicationYear");
 				
-				Books book = new Books(bookId, title, 
+				Book book = new Book(bookId, title,
 						resultPublisherName, resPublicationYear );				
 				bookList.add(book);
 			}
@@ -219,7 +307,7 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	
-	public List<Books> getBookByPublisherName
+	public List<Book> getBookByPublisherName
 		(String publisherName) throws SQLException {
 		String selectBooks =
 			"SELECT Book.PublisherName AS PublisherName, BookId, "
@@ -228,8 +316,8 @@ public class BookDao {
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
-		List<Books> bookList = 
-				new ArrayList<Books>();
+		List<Book> bookList =
+				new ArrayList<Book>();
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectBooks);
@@ -242,7 +330,7 @@ public class BookDao {
 				String resultPublisherName = results.getString("PublisherName");
 				String publicationYear = results.getString("PublicationYear");
 				
-				Books book = new Books(resultBookId, title, 
+				Book book = new Book(resultBookId, title,
 						resultPublisherName, publicationYear );
 				bookList.add(book);
 			}
@@ -271,7 +359,7 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	
-	public Books updateTitle(Books book, String newTitle) 
+	public Book updateTitle(Book book, String newTitle)
 			throws SQLException {
 		String updateBookTitle = "UPDATE Book SET "
 				+ "  Title=? WHERE BookId=?;";
@@ -307,7 +395,7 @@ public class BookDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Books updatePublisherName(Books book, String newPublisherName) 
+	public Book updatePublisherName(Book book, String newPublisherName)
 			throws SQLException {
 		String updatePublisherName = "UPDATE Book SET "
 				+ "  PublisherName=? WHERE BookId=?;";
@@ -344,7 +432,7 @@ public class BookDao {
 	 * @throws SQLException
 	 */
 	
-	public Books updatePublicationYear(Books book, String newPublicationYear) 
+	public Book updatePublicationYear(Book book, String newPublicationYear)
 			throws SQLException {
 		String updatePublicationYear = "UPDATE Book SET "
 				+ "  PublicationYear=? WHERE BookId=?;";

@@ -1,7 +1,7 @@
 package youbook.dal;
 
-import youbook.Model.Books;
-import youbook.Model.Subjects;
+import youbook.Model.Book;
+import youbook.Model.Subject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +25,7 @@ public class SubjectsDao {
         return instance;
     }
 
-    public Subjects create(Subjects subjects) throws SQLException {
+    public Subject create(Subject subject) throws SQLException {
         String insertSubjects =
             "INSERT INTO Subjects(SubjectMatter,BookId) " +
                 "VALUES(?,?);";
@@ -34,10 +34,10 @@ public class SubjectsDao {
         try {
             connection = connectionManager.getConnection();
             insertStmt = connection.prepareStatement(insertSubjects);
-            insertStmt.setString(1, subjects.getSubjectMatter());
-            insertStmt.setInt(2, subjects.getBook().getBookId());
+            insertStmt.setString(1, subject.getSubjectMatter());
+            insertStmt.setInt(2, subject.getBook().getBookId());
             insertStmt.executeUpdate();
-            return subjects;
+            return subject;
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -51,8 +51,8 @@ public class SubjectsDao {
         }
     }
 
-    public List<Subjects> getSubjectByBook(Books book) throws SQLException {
-        List<Subjects> subjects = new ArrayList<>();
+    public List<Subject> getSubjectByBook(Book book) throws SQLException {
+        List<Subject> subjects = new ArrayList<>();
         String selectWishList = "SELECT SubjectMatter FROM Subjects WHERE BookId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -64,7 +64,7 @@ public class SubjectsDao {
             results = selectStmt.executeQuery();
             while(results.next()) {
                 String subjectMatter = results.getString("SubjectMatter");
-                Subjects subject = new Subjects(subjectMatter, book);
+                Subject subject = new Subject(subjectMatter, book);
                 subjects.add(subject);
             }
         } catch (SQLException e) {
@@ -84,8 +84,8 @@ public class SubjectsDao {
         return subjects;
     }
 
-    public List<Subjects> getSubjectBySubjectMatter(String subjectMatter) throws SQLException {
-        List<Subjects> subjects = new ArrayList<>();
+    public List<Subject> getSubjectBySubjectMatter(String subjectMatter) throws SQLException {
+        List<Subject> subjects = new ArrayList<>();
         String selectSubjects = "SELECT BookId FROM Subjects WHERE SubjectMatter=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -97,8 +97,8 @@ public class SubjectsDao {
             results = selectStmt.executeQuery();
             while(results.next()) {
                 int bookId = results.getInt("BookId");
-                Books book = new Books(bookId);
-                Subjects subject = new Subjects(subjectMatter, book);
+                Book book = new Book(bookId);
+                Subject subject = new Subject(subjectMatter, book);
                 subjects.add(subject);
             }
         } catch (SQLException e) {
@@ -118,15 +118,15 @@ public class SubjectsDao {
         return subjects;
     }
 
-    public Subjects delete(Subjects subjects) throws SQLException {
+    public Subject delete(Subject subject) throws SQLException {
         String deleteUser = "DELETE FROM Subjects WHERE SubjectMatter=? AND BookId=?;";
         Connection connection = null;
         PreparedStatement deleteStmt = null;
         try {
             connection = connectionManager.getConnection();
             deleteStmt = connection.prepareStatement(deleteUser);
-            deleteStmt.setString(1, subjects.getSubjectMatter());
-            deleteStmt.setInt(2, subjects.getBook().getBookId());
+            deleteStmt.setString(1, subject.getSubjectMatter());
+            deleteStmt.setInt(2, subject.getBook().getBookId());
             deleteStmt.executeUpdate();
 
             return null;

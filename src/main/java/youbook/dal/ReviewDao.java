@@ -1,6 +1,6 @@
 package youbook.dal;
 
-import youbook.Model.Books;
+import youbook.Model.Book;
 import youbook.Model.Review;
 import youbook.Model.Users;
 import java.sql.Connection;
@@ -163,7 +163,7 @@ public class ReviewDao {
 //				Users user = userDao.getUserByReviewId(resultReviewId);
 //				Books book = bookDao.getBookByReviewId(resultReviewId);
 				Users user = new Users("a","a","a","a ","a","a");
-				Books book = new Books(1,"a","a","a ");
+				Book book = new Book(1,"a","a","a ");
 				Review review = new Review(resultReviewId, user,
 					book, rating, comment);
 				return review;
@@ -208,7 +208,7 @@ public class ReviewDao {
 				double rating = results.getDouble("Rating");
 				String comment = results.getString("Comment");
 //				Books book = ((BookDao) results).getBookByReviewId("ReviewId");
-				Books book = new Books(1,"a","a","a ");
+				Book book = new Book(1,"a","a","a ");
 				Review review = new Review(reviewId, user, book,
 					rating, comment);
 				reviews.add(review);
@@ -233,7 +233,7 @@ public class ReviewDao {
 	/**
 	 * Get the all the Reviews for a Book.
 	 */
-	public List<Review> getReviewsForBook(Books book) throws SQLException {
+	public List<Review> getReviewsForBook(Book book) throws SQLException {
 		List<Review> reviews = new ArrayList<Review>();
 		String selectReviews =
 			"SELECT ReviewId,UserName,BookId,Rating,Comment " +

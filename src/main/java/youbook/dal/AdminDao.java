@@ -1,7 +1,7 @@
 package youbook.dal;
 
 import youbook.Model.Admin;
-import youbook.Model.Persons;
+import youbook.Model.Person;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,7 +33,7 @@ public class AdminDao extends PersonsDao {
 	 */
 	public Admin create(Admin admin) throws SQLException{
 		// Insert into the superclass table first.
-		create(new Persons(admin.getUserName(), admin.getFirstName(), admin.getLastName()));
+		create(new Person(admin.getUserName(), admin.getFirstName(), admin.getLastName()));
 		
 		String insertAdministrator = "INSERT INTO Administrator(UserName,LastLogin) VALUES(?,?);";
 		Connection connection = null;

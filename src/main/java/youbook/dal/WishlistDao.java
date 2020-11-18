@@ -1,6 +1,6 @@
 package youbook.dal;
 
-import youbook.Model.Books;
+import youbook.Model.Book;
 import youbook.Model.Users;
 import youbook.Model.WishList;
 
@@ -77,7 +77,7 @@ public class WishlistDao {
             while(results.next()) {
                 int rstId = results.getInt("WishListID");
                 int rstBookId = results.getInt("BookId");
-                Books book = new Books(rstBookId);
+                Book book = new Book(rstBookId);
                 WishList wishList = new WishList(rstId);
                 wishList.setBook(book);
                 wishList.setUser(user);
@@ -100,7 +100,7 @@ public class WishlistDao {
         return wishLists;
     }
 
-    public List<WishList> getWishListsByBookId(Books book) throws SQLException {
+    public List<WishList> getWishListsByBookId(Book book) throws SQLException {
         List<WishList> wishLists = new ArrayList<>();
         String selectWishList = "SELECT WishListID,UserName FROM WishList WHERE BookId=?;";
         Connection connection = null;

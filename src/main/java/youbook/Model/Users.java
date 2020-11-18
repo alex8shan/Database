@@ -1,6 +1,6 @@
 package youbook.Model;
 
-public class Users extends Persons {
+public class Users extends Person {
 	public enum StatusLevels{ NOVICE, INTERMEDIATE, AVID_READER}
 	protected String emailAddress;
 	protected String phoneNumber;
@@ -15,8 +15,8 @@ public class Users extends Persons {
 		this.paypalID = paypalID;
 	}
 
-	public Users(Persons person, String firstName, String lastName, String emailAddress,
-			String phoneNumber, String paypalID) {
+	public Users(Person person, String firstName, String lastName, String emailAddress,
+	             String phoneNumber, String paypalID) {
 		super(person.getUserName(), person.getFirstName(), person.getLastName());
 		this.emailAddress = emailAddress;
 		this.phoneNumber = phoneNumber;

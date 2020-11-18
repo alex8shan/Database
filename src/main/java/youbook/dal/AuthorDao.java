@@ -1,7 +1,7 @@
 package youbook.dal;
 
-import youbook.Model.Authors;
-import youbook.Model.Books;
+import youbook.Model.Author;
+import youbook.Model.Book;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,7 +34,7 @@ public class AuthorDao {
 	 * @throws SQLException
 	 */
 	
-	public Authors create(Authors author) throws SQLException {
+	public Author create(Author author) throws SQLException {
 
 		String insertRecommendation = "INSERT INTO Author(AuthorID, BookId) "
 				+ " VALUES(?,?);";
@@ -78,7 +78,7 @@ public class AuthorDao {
    * @throws SQLException
    */
 	
-  public Authors delete(Authors author) throws SQLException {
+  public Author delete(Author author) throws SQLException {
 	String deleteAuthor = "DELETE FROM Author WHERE AuthorId=?;";
 	Connection connection = null;
 	PreparedStatement deleteStmt = null;
@@ -114,7 +114,7 @@ public class AuthorDao {
    * @throws SQLException
    */
   
- public Authors getAuthorById(int authorId)throws SQLException {
+ public Author getAuthorById(int authorId)throws SQLException {
 
 		String selectAuthor =
 			"SELECT Author.AuthorId AS AuthorId, "
@@ -135,7 +135,7 @@ public class AuthorDao {
 				String authorName = results.getString("AuthorName");
 				int bookId = results.getInt("BookId");
 				
-				Authors author = new Authors(resultAuthorId, authorName, bookId);
+				Author author = new Author(resultAuthorId, authorName, bookId);
 				return author;
 			}
 		} catch (SQLException e) {
@@ -162,7 +162,7 @@ public class AuthorDao {
 	  * @throws SQLException
 	  */
  
- 	public List<Authors> getAuthorByBookId(int bookId)
+ 	public List<Author> getAuthorByBookId(int bookId)
 				throws SQLException {
 			
 	String selectBooks =
@@ -172,8 +172,8 @@ public class AuthorDao {
 	Connection connection = null;
 	PreparedStatement selectStmt = null;
 	ResultSet results = null;
-	List<Authors> authorList = 
-			new ArrayList<Authors>();
+	List<Author> authorList =
+			new ArrayList<Author>();
 	try {
 		connection = connectionManager.getConnection();
 		selectStmt = connection.prepareStatement(selectBooks);
@@ -185,7 +185,7 @@ public class AuthorDao {
 			String authorName = results.getString("AuthorName");
 			int authorId = results.getInt("AuthorId");
 			
-			Authors author = new Authors(authorId, authorName, resultBookId);
+			Author author = new Author(authorId, authorName, resultBookId);
 			
 			
 			authorList.add(author);
@@ -213,7 +213,7 @@ public class AuthorDao {
  	 * @throws SQLException
  	 */
 		
-	public List<Books> getBooksByAuthorName
+	public List<Book> getBooksByAuthorName
 	(String authorName)
 			throws SQLException {
 		// To build an BlogUser object, we need the Persons record, too.
@@ -225,8 +225,8 @@ public class AuthorDao {
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
-		List<Books> bookList = 
-				new ArrayList<Books>();
+		List<Book> bookList =
+				new ArrayList<Book>();
 		try {
 			connection = connectionManager.getConnection();
 			selectStmt = connection.prepareStatement(selectBooks);
@@ -240,8 +240,8 @@ public class AuthorDao {
 				String publisherName = results.getString("PublisherName");
 				String publicationYear = results.getString("PublicationYear");
 				
-				Books book = 
-						new Books(bookId, title, 
+				Book book =
+						new Book(bookId, title,
 								publisherName, publicationYear );
 				bookList.add(book);
 			}
@@ -270,8 +270,8 @@ public class AuthorDao {
 	 * @throws SQLException
 	 */
 	
-	public Authors updateAuthorName
-	(Authors author, String newName) throws SQLException {
+	public Author updateAuthorName
+	(Author author, String newName) throws SQLException {
 		String updateAuthorName = "UPDATE Author SET Name=? WHERE "
 				+ "AuthorId=?;";
 		Connection connection = null;

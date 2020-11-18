@@ -4,15 +4,15 @@ public class Review {
 	
 	protected int reviewId;
 	protected Users users;
-	protected Books books;
+	protected Book book;
 	protected double rating;
 	protected String comment;
 	
 
-	public Review(int reviewId, Users users, Books books, double rating, String comment) {
+	public Review(int reviewId, Users users, Book book, double rating, String comment) {
 		this.reviewId = reviewId;
 		this.users = users;
-		this.books = books;
+		this.book = book;
 		this.rating = rating;
 		this.comment = comment;
 	}
@@ -29,12 +29,12 @@ public class Review {
 		this.reviewId = reviewId;
 	}
 	
-	public Books getBook() {
-		return this.books;
+	public Book getBook() {
+		return this.book;
 	}
 	
-	public void setBook(Books books) {
-		this.books = books;
+	public void setBook(Book book) {
+		this.book = book;
 	}
 	
 	public Users getUser() {

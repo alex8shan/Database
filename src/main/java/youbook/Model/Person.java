@@ -10,20 +10,20 @@ package youbook.Model;
  * interface or an abstract class, which would force a Persons record to be created only
  * if an Administrators or BlogUsers record is created, too.
  */
-public class Persons {
+public class Person {
 	protected String userName;
 	protected String firstName;
 	protected String lastName;
 	
 	// For reading records which have all fields
-	public Persons(String userName, String firstName, String lastName) {
+	public Person(String userName, String firstName, String lastName) {
 		this.userName = userName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
 	
 	// For reading records which only have the userName
-	public Persons(String userName) {
+	public Person(String userName) {
 		this.userName = userName;
 	}
 

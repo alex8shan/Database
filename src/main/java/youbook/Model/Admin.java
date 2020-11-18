@@ -2,7 +2,7 @@ package youbook.Model;
 
 import java.util.Date;
 
-public class Admin extends Persons {
+public class Admin extends Person {
 	protected Date lastLogin;
 
 	public Admin(String userName, String firstName, String lastName, Date lastLogin) {
@@ -10,7 +10,7 @@ public class Admin extends Persons {
 		this.lastLogin = lastLogin;
 	}
 
-	public Admin(Persons person, Date lastLogin) {
+	public Admin(Person person, Date lastLogin) {
 		super(person.getUserName(), person.getFirstName(), person.getLastName());
 		this.lastLogin = lastLogin;
 	}
