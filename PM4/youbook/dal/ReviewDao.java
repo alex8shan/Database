@@ -11,11 +11,11 @@ import java.util.List;
 public class ReviewDao {
 	protected ConnectionManager connectionManager;
 	private static ReviewDao instance = null;
-	
+
 	protected ReviewDao() {
 		connectionManager = new ConnectionManager();
 	}
-	
+
 	public static ReviewDao getInstance() {
 		if(instance == null) {
 			instance = new ReviewDao();
@@ -39,7 +39,7 @@ public class ReviewDao {
 			insertStmt.setDouble(3, review.getRating());
 			insertStmt.setString(4, review.getComment());
 			insertStmt.executeUpdate();
-			
+
 			// Retrieve the auto-generated key and set it, so it can be used by the caller.
 			resultKey = insertStmt.getGeneratedKeys();
 			int reviewId = -1;
@@ -154,9 +154,12 @@ public class ReviewDao {
 				int resultReviewId = results.getInt("ReviewId");
 				double rating = results.getDouble("Rating");
 				String comment = results.getString("Comment");
-				
-				Users user = userDao.getUserByReviewId(resultReviewId);
-				Books book = bookDao.getBookByReviewId(resultReviewId);
+
+				/////////////////////////////////////////Attention! There is not method in those classes!
+//				Users user = userDao.getUserByReviewId(resultReviewId);
+//				Books book = bookDao.getBookByReviewId(resultReviewId);
+				Users user = new Users("a","a","a","a ","a","a");
+				Books book = new Books(1,"a","a","a ");
 				Review review = new Review(resultReviewId, user,
 					book, rating, comment);
 				return review;
@@ -200,7 +203,8 @@ public class ReviewDao {
 				int reviewId = results.getInt("ReviewId");
 				double rating = results.getDouble("Rating");
 				String comment = results.getString("Comment");
-				Books book = ((BookDao) results).getBookByReviewId("ReviewId");
+//				Books book = ((BookDao) results).getBookByReviewId("ReviewId");
+				Books book = new Books(1,"a","a","a ");
 				Review review = new Review(reviewId, user, book,
 					rating, comment);
 				reviews.add(review);
@@ -221,7 +225,7 @@ public class ReviewDao {
 		}
 		return reviews;
 	}
-	
+
 	/**
 	 * Get the all the Reviews for a Book.
 	 */
@@ -244,7 +248,8 @@ public class ReviewDao {
 				int reviewId = results.getInt("ReviewId");
 				double rating = results.getDouble("Rating");
 				String comment = results.getString("Comment");
-				Users user = ((UsersDao) results).getUserByReviewId("ReviewId");
+//				Users user = ((UsersDao) results).getUserByReviewId("ReviewId");
+				Users user = new Users("a","a","a","a ","a","a");
 				Review review = new Review(reviewId, user, book,
 					rating, comment);
 				reviews.add(review);

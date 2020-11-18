@@ -27,7 +27,7 @@ protected ConnectionManager connectionManager;
 	}
 	
 	public Persons create(Persons person) throws SQLException {
-		String insertPerson = "INSERT INTO Persons(UserName,FirstName,LastName) VALUES(?,?,?);";
+		String insertPerson = "INSERT INTO Person(UserName,FirstName,LastName) VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
@@ -72,7 +72,7 @@ protected ConnectionManager connectionManager;
 	 * This runs a UPDATE statement.
 	 */
 	public Persons updateLastName(Persons person, String newLastName) throws SQLException {
-		String updatePerson = "UPDATE Persons SET LastName=? WHERE UserName=?;";
+		String updatePerson = "UPDATE Person SET LastName=? WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -103,7 +103,7 @@ protected ConnectionManager connectionManager;
 	 * This runs a DELETE statement.
 	 */
 	public Persons delete(Persons person) throws SQLException {
-		String deletePerson = "DELETE FROM Persons WHERE UserName=?;";
+		String deletePerson = "DELETE FROM Person WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -132,7 +132,7 @@ protected ConnectionManager connectionManager;
 	 * This runs a SELECT statement and returns a single Persons instance.
 	 */
 	public Persons getPersonFromUserName(String userName) throws SQLException {
-		String selectPerson = "SELECT UserName,FirstName,LastName FROM Persons WHERE UserName=?;";
+		String selectPerson = "SELECT UserName,FirstName,LastName FROM Person WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -179,7 +179,7 @@ protected ConnectionManager connectionManager;
 	public List<Persons> getPersonsFromFirstName(String firstName) throws SQLException {
 		List<Persons> persons = new ArrayList<Persons>();
 		String selectPersons =
-			"SELECT UserName,FirstName,LastName FROM Persons WHERE FirstName=?;";
+			"SELECT UserName,FirstName,LastName FROM Person WHERE FirstName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

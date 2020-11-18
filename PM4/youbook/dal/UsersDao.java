@@ -27,7 +27,7 @@ public class UsersDao extends PersonsDao {
 		// Insert into the superclass table first.
 		create(new Persons(user.getUserName(), user.getFirstName(), user.getLastName()));
 		
-		String insertUser = "INSERT INTO Users(UserName,EmailAddress,PhoneNumber,PaypalID) VALUES(?,?,?,?);";
+		String insertUser = "INSERT INTO User(UserName,EmailAddress,PhoneNumber,PaypalID) VALUES(?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
@@ -68,10 +68,10 @@ public class UsersDao extends PersonsDao {
 	public Users getUserByUserName(String userName) throws SQLException {
 		// To build an User object, we need the Persons record, too.
 		String selectUser =
-			"SELECT Users.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID " +
-			"FROM Users INNER JOIN Persons " +
-			"  ON Users.UserName = Persons.UserName " +
-			"WHERE Users.UserName=?;";
+			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID " +
+			"FROM User INNER JOIN Person " +
+			"  ON User.UserName = Person.UserName " +
+			"WHERE User.UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -111,7 +111,7 @@ public class UsersDao extends PersonsDao {
 	}
 	
 	public Users delete(Users user) throws SQLException{
-		String deleteUser = "DELETE FROM Users WHERE UserName=?;";
+		String deleteUser = "DELETE FROM User WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		
@@ -143,8 +143,8 @@ public class UsersDao extends PersonsDao {
 			throws SQLException {
 		List<Users> users = new ArrayList<Users>();
 		String selectAdministrators =
-			"SELECT Users.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID" +
-			"FROM Users INNER JOIN Persons " +
+			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID" +
+			"FROM User INNER JOIN Person " +
 			"  ON Users.UserName = Persons.UserName " +
 			"WHERE Persons.FirstName=?;";
 		Connection connection = null;

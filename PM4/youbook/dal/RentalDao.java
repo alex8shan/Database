@@ -13,11 +13,11 @@ import java.util.List;
 public class RentalDao {
 	protected ConnectionManager connectionManager;
 	private static RentalDao instance = null;
-	
+
 	protected RentalDao() {
 		connectionManager = new ConnectionManager();
 	}
-	
+
 	public static RentalDao getInstance() {
 		if(instance == null) {
 			instance = new RentalDao();
@@ -38,9 +38,9 @@ public class RentalDao {
 				Statement.RETURN_GENERATED_KEYS);
 			insertStmt.setInt(1, rental.getBook().getBookId());
 			insertStmt.setString(2, rental.getUser().getUserName());
-			insertStmt.setTimestamp(3, new Timestamp(rental.getCheckOutDate().getTime());
+			insertStmt.setTimestamp(3, new Timestamp(rental.getCheckOutDate().getTime()));
 			insertStmt.executeUpdate();
-		
+
 			return rental;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +63,7 @@ public class RentalDao {
 	 * This runs a DELETE statement.
 	 */
 	public Rental delete(Rental rental) throws SQLException {
-		String deleteRental = "DELETE FROM BlogComments WHERE BookId=? AND UserName=? AND CheckOutDate=?;";
+		String deleteRental = "DELETE FROM Rental WHERE BookId=? AND UserName=? AND CheckOutDate=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -86,7 +86,7 @@ public class RentalDao {
 		}
 	}
 
-	
+
 	/**
 	 * Get the all the Rentals for a user.
 	 */
@@ -107,6 +107,7 @@ public class RentalDao {
 			BookDao bookDao = BookDao.getInstance();
 			while(results.next()) {
 				Date created =  new Date(results.getTimestamp("Created").getTime());
+				int bookId = results.getInt("BookId");
 				Books book = bookDao.getBookById(bookId);
 				Rental rental = new Rental(book, user, created);
 				rentals.add(rental);
@@ -127,11 +128,11 @@ public class RentalDao {
 		}
 		return rentals;
 	}
-	
+
 	/**
 	 * Get the all the Rentals of a Book.
 	 */
-	public List<Rental> getRentalsForBook(Book book) throws SQLException {
+	public List<Rental> getRentalsForBook(Books book) throws SQLException {
 		List<Rental> rentals = new ArrayList<Rental>();
 		String selectRentals =
 			"SELECT BookId, UserName, CheckOutDate " +
@@ -149,6 +150,7 @@ public class RentalDao {
 			while(results.next()) {
 				while(results.next()) {
 					Date created =  new Date(results.getTimestamp("Created").getTime());
+					String userName = results.getString("UserName");
 					Users user = userDao.getUserByUserName(userName);
 					Rental rental = new Rental(book, user, created);
 					rentals.add(rental);
