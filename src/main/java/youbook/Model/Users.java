@@ -1,30 +1,46 @@
-package youbook.Model;
+package youbook.model;
 
-public class Users extends Person {
+
+public class Users extends Persons {
 	public enum StatusLevels{ NOVICE, INTERMEDIATE, AVID_READER}
 	protected String emailAddress;
 	protected String phoneNumber;
 	protected String paypalID;
+	protected StatusLevels userLevel;
 	
 	//For reading records which have all fields
 	public Users(String userName, String firstName, String lastName, String emailAddress,
-			String phoneNumber, String paypalID) {
+			String phoneNumber, String paypalID, StatusLevels userLevel) {
 		super(userName, firstName, lastName);
 		this.emailAddress = emailAddress;
 		this.phoneNumber = phoneNumber;
 		this.paypalID = paypalID;
+		this.userLevel = userLevel;
 	}
 
-	public Users(Person person, String firstName, String lastName, String emailAddress,
-	             String phoneNumber, String paypalID) {
+	public Users(Persons person, String firstName, String lastName, String emailAddress,
+			String phoneNumber, String paypalID, StatusLevels userLevel) {
 		super(person.getUserName(), person.getFirstName(), person.getLastName());
 		this.emailAddress = emailAddress;
 		this.phoneNumber = phoneNumber;
 		this.paypalID = paypalID;
+		this.userLevel = userLevel;
 	}
 	
+	public StatusLevels getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(StatusLevels userLevel) {
+		this.userLevel = userLevel;
+	}
+
 	public Users(String userName) {
 		super(userName);
+	}
+
+	public Users(String userName, String firstName, String lastName) {
+		 super(userName, firstName, lastName);
 	}
 
 	public String getEmailAddress() {

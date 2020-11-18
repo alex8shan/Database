@@ -1,7 +1,8 @@
 package youbook.dal;
 
-import youbook.Model.Person;
-import youbook.Model.Users;
+
+import youbook.model.*;
+import youbook.model.Users.StatusLevels;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,9 +31,9 @@ public class UsersDao extends PersonsDao {
 	 */
 	public Users create(Users user) throws SQLException{
 		// Insert into the superclass table first.
-		create(new Person(user.getUserName(), user.getFirstName(), user.getLastName()));
+		create(new Persons(user.getUserName(), user.getFirstName(), user.getLastName()));
 		
-		String insertUser = "INSERT INTO User(UserName,EmailAddress,PhoneNumber,PaypalID) VALUES(?,?,?,?);";
+		String insertUser = "INSERT INTO User(UserName,EmailAddress,PhoneNumber,PaypalID, StatusLevels) VALUES(?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
@@ -43,7 +44,7 @@ public class UsersDao extends PersonsDao {
 			insertStmt.setString(2, user.getEmailAddress());
 			insertStmt.setString(3, user.getPhoneNumber());
 			insertStmt.setString(4, user.getPaypalID());
-
+			insertStmt.setString(5, user.getUserLevel().toString());
 			insertStmt.executeUpdate();
 			return user;
 		} catch (SQLException e) {
@@ -73,9 +74,9 @@ public class UsersDao extends PersonsDao {
 	public Users getUserByUserName(String userName) throws SQLException {
 		// To build an User object, we need the Persons record, too.
 		String selectUser =
-			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID " +
-			"FROM User INNER JOIN Person " +
-			"  ON User.UserName = Person.UserName " +
+			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID, StatusLevels " +
+			"FROM User INNER JOIN Persons " +
+			"  ON User.UserName = Persons.UserName " +
 			"WHERE User.UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -95,7 +96,8 @@ public class UsersDao extends PersonsDao {
 				String emailAddress = results.getString("EmailAddress");
 				String phoneNumber = results.getString("PhoneNumber");
 				String paypalID = results.getString("PaypalID");
-				Users user = new Users(resultUserName, firstName, lastName, emailAddress, phoneNumber, paypalID);
+				StatusLevels status = Users.StatusLevels.valueOf(results.getString("StatusLevels"));
+				Users user = new Users(resultUserName, firstName, lastName, emailAddress, phoneNumber, paypalID, status);
 				return user;
 			}
 		} catch(SQLException e) {
@@ -148,9 +150,9 @@ public class UsersDao extends PersonsDao {
 			throws SQLException {
 		List<Users> users = new ArrayList<Users>();
 		String selectAdministrators =
-			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID" +
-			"FROM User INNER JOIN Person " +
-			"  ON Users.UserName = Persons.UserName " +
+			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID, StatusLevels" +
+			"FROM User INNER JOIN Persons " +
+			"  ON User.UserName = Persons.UserName " +
 			"WHERE Persons.FirstName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -167,7 +169,8 @@ public class UsersDao extends PersonsDao {
 				String emailAddress = results.getString("EmailAddress");
 				String phoneNumber = results.getString("PhoneNumber");
 				String paypalID = results.getString("PaypalID");
-				Users user = new Users(userName, resultFirstName, lastName, emailAddress, phoneNumber, paypalID);
+				StatusLevels statusLevels = Users.StatusLevels.valueOf(results.getString("StatusLevels"));
+				Users user = new Users(userName, resultFirstName, lastName, emailAddress, phoneNumber, paypalID, statusLevels);
 				users.add(user);
 			}
 		} catch (SQLException e) {
