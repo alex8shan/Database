@@ -1,4 +1,4 @@
-
+package youbook.Model;
 
 public class WishList {
     private int wishlistId;

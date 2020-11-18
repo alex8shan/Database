@@ -1,3 +1,7 @@
+package youbook.dal;
+
+import youbook.Model.Authors;
+import youbook.Model.Books;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +36,7 @@ public class AuthorDao {
 	
 	public Authors create(Authors author) throws SQLException {
 
-		String insertRecommendation = "INSERT INTO Authors(AuthorName, BookId) "
+		String insertRecommendation = "INSERT INTO Author(AuthorID, BookId) "
 				+ " VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -75,7 +79,7 @@ public class AuthorDao {
    */
 	
   public Authors delete(Authors author) throws SQLException {
-	String deleteAuthor = "DELETE FROM Authors WHERE AuthorId=?;";
+	String deleteAuthor = "DELETE FROM Author WHERE AuthorId=?;";
 	Connection connection = null;
 	PreparedStatement deleteStmt = null;
 	try {
@@ -113,9 +117,9 @@ public class AuthorDao {
  public Authors getAuthorById(int authorId)throws SQLException {
 
 		String selectAuthor =
-			"SELECT Authors.AuthorId AS AuthorId, "
-			+ " AuthorName, BookId "
-			+ "FROM Authors WHERE AuthorId=?;";
+			"SELECT Author.AuthorId AS AuthorId, "
+			+ " Name, BookId "
+			+ "FROM Author WHERE AuthorId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -153,7 +157,7 @@ public class AuthorDao {
 		
 	 /**
 	  * Get list of authors of a book
-	  * @param authorId
+	  * @param
 	  * @return
 	  * @throws SQLException
 	  */
@@ -163,8 +167,8 @@ public class AuthorDao {
 			
 	String selectBooks =
 		"SELECT BookId AS BookId, AuthorId, "
-		+ " AuthorName "
-		+ " FROM Authors WHERE BookId=?;";
+		+ " Name "
+		+ " FROM Author WHERE BookId=?;";
 	Connection connection = null;
 	PreparedStatement selectStmt = null;
 	ResultSet results = null;
@@ -214,10 +218,10 @@ public class AuthorDao {
 			throws SQLException {
 		// To build an BlogUser object, we need the Persons record, too.
 		String selectBooks =
-			"SELECT AuthorName AS AuthorName, Authors.BookId, "
-			+ " Books.Title, PublisherName, PublicationYear "
-			+ " FROM Authors JOIN Books ON Authors.BookId=Books.BookId"
-			+ "  WHERE AuthorName=?;";
+			"SELECT Name AS AuthorName, Author.BookId, "
+			+ " Book.Title, PublisherName, PublicationYear "
+			+ " FROM Author JOIN Book ON Author.BookId=Book.BookId"
+			+ "  WHERE Name=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -268,7 +272,7 @@ public class AuthorDao {
 	
 	public Authors updateAuthorName
 	(Authors author, String newName) throws SQLException {
-		String updateAuthorName = "UPDATE Authors SET AuthorName=? WHERE "
+		String updateAuthorName = "UPDATE Author SET Name=? WHERE "
 				+ "AuthorId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;

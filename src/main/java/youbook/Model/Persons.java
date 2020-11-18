@@ -1,4 +1,4 @@
-
+package youbook.Model;
 
 /**
  * Persons is a simple, plain old java objects (POJO).

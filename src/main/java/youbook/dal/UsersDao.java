@@ -1,23 +1,25 @@
+package youbook.dal;
+
+import youbook.Model.Persons;
+import youbook.Model.Users;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-
-public class AdminDao extends PersonsDao {
+public class UsersDao extends PersonsDao {
 	protected ConnectionManager connectionManager;
 	// Single pattern: instantiation is limited to one object.
-	private static AdminDao instance = null;
-	protected AdminDao() {
+	private static UsersDao instance = null;
+	protected UsersDao() {
 		connectionManager = new ConnectionManager();
 	}
-	public static AdminDao getInstance() {
+	public static UsersDao getInstance() {
 		if(instance == null) {
-			instance = new AdminDao();
+			instance = new UsersDao();
 		}
 		return instance;
 	}
@@ -26,22 +28,24 @@ public class AdminDao extends PersonsDao {
 	 * Save the Users instance by storing it in your MySQL instance.
 	 * This runs a INSERT statement.
 	 */
-	public Admin create(Admin admin) throws SQLException{
+	public Users create(Users user) throws SQLException{
 		// Insert into the superclass table first.
-		create(new Persons(admin.getUserName(), admin.getFirstName(), admin.getLastName()));
+		create(new Persons(user.getUserName(), user.getFirstName(), user.getLastName()));
 		
-		String insertAdministrator = "INSERT INTO Administrator(UserName,LastLogin) VALUES(?,?);";
+		String insertUser = "INSERT INTO User(UserName,EmailAddress,PhoneNumber,PaypalID) VALUES(?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
 			connection = connectionManager.getConnection();
-			insertStmt = connection.prepareStatement(insertAdministrator);
+			insertStmt = connection.prepareStatement(insertUser);
 			
-			insertStmt.setString(1, admin.getUserName());
-			insertStmt.setTimestamp(2, new Timestamp(admin.getLastLogin().getTime()));
+			insertStmt.setString(1, user.getUserName());
+			insertStmt.setString(2, user.getEmailAddress());
+			insertStmt.setString(3, user.getPhoneNumber());
+			insertStmt.setString(4, user.getPaypalID());
 
 			insertStmt.executeUpdate();
-			return admin;
+			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -56,30 +60,30 @@ public class AdminDao extends PersonsDao {
 	}
 	
 	/**
-	 * Update the LastName of the Administrators instance.
+	 * Update the LastName of the Users instance.
 	 * This runs a UPDATE statement.
 	 */
-	public Admin updateLastName(Admin admin, String newLastName) throws SQLException {
+	public Users updateLastName(Users user, String newLastName) throws SQLException {
 		// The field to update only exists in the superclass table, so we can
 		// just call the superclass method.
-		super.updateLastName(admin, newLastName);
-		return admin;
+		super.updateLastName(user, newLastName);
+		return user;
 	}
 	
-	public Admin getAdminByUserName(String userName) throws SQLException {
-		// To build an Administrator object, we need the Persons record, too.
-		String selectAdmin =
-			"SELECT Administrator.UserName AS UserName, FirstName, LastName, LastLogin " +
-			"FROM Administrator INNER JOIN Persons " +
-			"  ON Administrator.UserName = Persons.UserName " +
-			"WHERE Administrator.UserName=?;";
+	public Users getUserByUserName(String userName) throws SQLException {
+		// To build an User object, we need the Persons record, too.
+		String selectUser =
+			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID " +
+			"FROM User INNER JOIN Person " +
+			"  ON User.UserName = Person.UserName " +
+			"WHERE User.UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
 		
 		try {
 			connection = connectionManager.getConnection();
-			selectStmt = connection.prepareStatement(selectAdmin);
+			selectStmt = connection.prepareStatement(selectUser);
 			
 			selectStmt.setString(1, userName);
 			results = selectStmt.executeQuery();
@@ -88,9 +92,11 @@ public class AdminDao extends PersonsDao {
 				String resultUserName = results.getString("UserName");
 				String firstName = results.getString("FirstName");
 				String lastName = results.getString("LastName");
-				Date lastLogin = new Date(results.getTimestamp("Created").getTime());
-				Admin admin = new Admin(resultUserName, firstName, lastName, lastLogin);
-				return admin;
+				String emailAddress = results.getString("EmailAddress");
+				String phoneNumber = results.getString("PhoneNumber");
+				String paypalID = results.getString("PaypalID");
+				Users user = new Users(resultUserName, firstName, lastName, emailAddress, phoneNumber, paypalID);
+				return user;
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -109,22 +115,21 @@ public class AdminDao extends PersonsDao {
 		return null;
 	}
 	
-	public Admin delete(Admin admin) throws SQLException{
-		String deleteUser = "DELETE FROM Administrator WHERE UserName=?;";
+	public Users delete(Users user) throws SQLException{
+		String deleteUser = "DELETE FROM User WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		
 		try {
 			connection = connectionManager.getConnection();
 			deleteStmt = connection.prepareStatement(deleteUser);
-			deleteStmt.setString(1, admin.getUserName());
+			deleteStmt.setString(1, user.getUserName());
 			deleteStmt.executeUpdate();
 			
 			// Then also delete from the superclass.
 			// Note: due to the fk constraint (ON DELETE CASCADE), we could simply call
-			// super.delete() without even needing to delete from Administrators first.
-			super.delete(admin);
-			
+			// super.delete() without even needing to delete from Users first.
+			super.delete(user);
 			return null;
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -139,13 +144,13 @@ public class AdminDao extends PersonsDao {
 		}
 	}
 	
-	public List<Admin> getAdminFromFirstName(String firstName)
+	public List<Users> getAdminFromFirstName(String firstName)
 			throws SQLException {
-		List<Admin> admins = new ArrayList<Admin>();
+		List<Users> users = new ArrayList<Users>();
 		String selectAdministrators =
-			"SELECT Administrator.UserName AS UserName, FirstName, LastName, LastLogin " +
-			"FROM Administrator INNER JOIN Persons " +
-			"  ON Administrator.UserName = Persons.UserName " +
+			"SELECT User.UserName AS UserName, FirstName, LastName, EmailAddress, PhoneNumber, PaypalID" +
+			"FROM User INNER JOIN Person " +
+			"  ON Users.UserName = Persons.UserName " +
 			"WHERE Persons.FirstName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -159,9 +164,11 @@ public class AdminDao extends PersonsDao {
 				String userName = results.getString("UserName");
 				String resultFirstName = results.getString("FirstName");
 				String lastName = results.getString("LastName");
-				Date lastLogin = new Date(results.getTimestamp("LastLogin").getTime());
-				Admin admin = new Admin(userName, resultFirstName, lastName, lastLogin);
-				admins.add(admin);
+				String emailAddress = results.getString("EmailAddress");
+				String phoneNumber = results.getString("PhoneNumber");
+				String paypalID = results.getString("PaypalID");
+				Users user = new Users(userName, resultFirstName, lastName, emailAddress, phoneNumber, paypalID);
+				users.add(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,6 +184,6 @@ public class AdminDao extends PersonsDao {
 				results.close();
 			}
 		}
-		return admins;
+		return users;
 	}
 }

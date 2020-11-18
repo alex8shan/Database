@@ -1,3 +1,6 @@
+package youbook.dal;
+
+import youbook.Model.Books;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

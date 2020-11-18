@@ -1,4 +1,4 @@
-
+package youbook.Model;
 
 import java.util.Date;
 

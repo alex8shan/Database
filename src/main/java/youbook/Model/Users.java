@@ -1,4 +1,4 @@
-
+package youbook.Model;
 
 public class Users extends Persons {
 	public enum StatusLevels{ NOVICE, INTERMEDIATE, AVID_READER}
