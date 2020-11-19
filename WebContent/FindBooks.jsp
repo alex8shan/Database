@@ -27,6 +27,13 @@
 	<div id="wishlistCreate"><a href="wishlistcreate">CreateWishlist</a></div>
 	<div id=""><a href="findtopbooks">TopBooks</a></div>
 	<br/>
+	
+	<br/>
+	<div id="userUpdate"><a href="userupdate">Update User</a></div>
+	<div id="userDelete"><a href="userdelete">Delete User</a></div>
+	<br/>
+	
+	
 	<h1>Matching Books</h1>
         <table border="1">
             <tr>
