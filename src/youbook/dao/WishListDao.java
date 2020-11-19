@@ -189,6 +189,37 @@ public class WishListDao {
         }
         return wishLists;
     }
+	
+	/**
+	 * Delete one single book from the wishlist based on bookId.
+	 */
+    public WishList deleteBybookId(int bookId, WishList wishList) throws SQLException {
+	    String deleteWishList = "DELETE FROM WishList WHERE WishListID=? and BookId=?;";
+	    Connection connection = null;
+	    PreparedStatement deleteStmt = null;
+	    try {
+		    connection = connectionManager.getConnection();
+		    deleteStmt = connection.prepareStatement(deleteWishList);
+		    deleteStmt.setInt(1, wishList.getWishlistId());
+		    deleteStmt.setInt(2, bookId);
+		    int affectedRows = deleteStmt.executeUpdate();
+		    if (affectedRows == 0) {
+			    throw new SQLException("No records available to delete for WishListId=" + wishList.getWishlistId());
+		    }
+		    return null;
+	    } catch (SQLException e) {
+		    e.printStackTrace();
+		    throw e;
+	    } finally {
+		    if(connection != null) {
+			    connection.close();
+		    }
+		    if(deleteStmt != null) {
+			    deleteStmt.close();
+		    }
+	    }
+    }
+    
     
 	/*
 	 * Delete the WishList instance.
