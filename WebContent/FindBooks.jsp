@@ -43,6 +43,7 @@
                 <th>Publisher Year</th>
                 <th>DeleteWishlist</th>
                 <th>UpdateWishlist</th>
+                <th>Rent</th>
             </tr>
             <c:forEach items="${books}" var="book" >
                 <tr>
@@ -52,6 +53,7 @@
                     <td><c:out value="${book.getPublicationYear()}" /></td>
                     <td><a href="bookIddelete?bookId=<c:out value="${book.getBookId()}"/>">Delete</a></td>
                     <td><a href="bookupdate?bookId=<c:out value="${book.getBookId()}"/>">Update</a></td>
+                    <td><a href="rentalcreate?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Rent</a></td>
                 </tr>
             </c:forEach>
        </table>

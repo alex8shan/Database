@@ -58,6 +58,7 @@ public class Login extends HttpServlet {
 	        	}
 	        	else {
 	        	messages.put("success", "Login Successfull " + userName);
+	        	req.getSession().setAttribute("username", userName);
 	        	req.getRequestDispatcher("/FindBooks.jsp").forward(req, resp);}
 	        } catch (SQLException e) {
 				e.printStackTrace();
