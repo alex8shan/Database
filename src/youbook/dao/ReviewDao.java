@@ -39,7 +39,7 @@ public class ReviewDao {
 	public Review create(Review review) throws SQLException {
 		String insertReview = 
 			"INSERT INTO Review(UserName,BookId,Rating,Comment) " +
-			"VALUES(?，?,?,?);";
+			"VALUES(?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
