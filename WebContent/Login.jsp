@@ -14,23 +14,24 @@
 <title>Login</title>
 </head>
 <body>
-	<form action="login" method="post">
-		<h1>Please enter the username </h1>
-		<p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="${fn:escapeXml(param.username)}">
-		</p>
+	<h2 align = "center" > YouBook Login </h2>
+	<div class="container login-container">
+        <div class="col-lg-4">
+            <form action="login" method="post">
+		<div class="form-group" align = "center">
+			<input id="username" name="username" placeholder="Username" class="form-control"  value="${fn:escapeXml(param.username)}">
+		</div>
 		
-		<p>
-			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
-		</p>
+		<div class="form-group" align = "center">
+        <button type="submit" class="btn-login btn">Login</button>
+      </div>
+      <div class="form-group" align = "center">
+        <button type="submit" class="btn btn-new"> <a href = "usercreate">Register</a></button>
+      </div>
 	</form>
-	
-	<br/>
-	<div id="userCreate"><a href="usercreate">Create User</a></div>
-	<br/>
+        </div>
+    </div>
+</div>
 	
 </body>
 </html>

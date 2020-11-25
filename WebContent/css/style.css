@@ -1,0 +1,33 @@
+@charset "UTF-8";
+ input {
+  margin-bottom: 10px;
+  alignment: center;
+  background: #ffffff;
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 13px;
+  color: #000000;  
+}
+
+#login {
+    border:2px solid grey ;
+    padding:40px 40px;
+    margin-top:60px;
+    position: relative;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn {
+  background-color: red;
+  text-align: center;
+  color: white;
+  border-radius: 20%;
+  cursor: pointer;
+}
+.btn-new {
+  background-color: skyblue;
+}
