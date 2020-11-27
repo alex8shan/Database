@@ -55,7 +55,7 @@ public class FindBooks extends HttpServlet {
         }
         req.setAttribute("books", books);
         
-        req.getRequestDispatcher("/Findbooks.jsp").forward(req, resp);
+        req.getRequestDispatcher("/FindBooks.jsp").forward(req, resp);
 	}
 	
 	@Override

@@ -15,37 +15,42 @@
 <title>Register</title>
 </head>
 <body>
-<div class="login container">
-	<h1 class = "text-center">YouBook</h1>
+	<div class="login container">
+    <h1 class = "text-center">YouBook</h1>
     <h2 class = text-center"> Registration Form</h2>
     <form action = "usercreate" method="post">
-		<p class = "text-center">
-			<div class="col-md-10 form-group">
-  				<input type="text" name="username" placeholder="Username" id="username" required="required" data-error="Please enter your user name.">
-			</div>
-			<div class="col-md-10 form-group">
-  				<input type="text" name="firstname" placeholder="FirstName" id="firstname" required="required" data-error="Please enter your first name.">
-			</div>
-			<div class="col-md-10 form-group">
-  				<input type="text" name="lastname" placeholder="LastName" id="lastname" required="required" data-error="Please enter your last name.">
-			</div>
-			<div class="col-md-10 form-group">
-  				<input type="text" name="email" placeholder="Email" id="emailid" required="required" data-error="Please enter your email.">
-			</div>
-			<div class="col-md-10 form-group">
-  				<input type="text" name="phonenumber" placeholder="Phonenumber" id="phonenumber">
-			</div>
-			<div class="col-md-10 form-group">
-  				<input type="text" name="paypalid" placeholder="Paypal" id="paypalid" required="required" data-error="Please enter your paypal ID.">
-			</div>
-			<div class="col-md-10 form-group" align="center">
-  				<button type="submit" class="btn"> Register</button>
-			</div>
-			<div class="col-md-10 form-group" align="center">
-  				<button type="reset" class="btn btn-new"> <a href = "login">Cancel</a></button>
-			</div>
-		</p>
-	</form>
+<p class = "text-center">
+<div class="col-md-10 form-group">
+  <input type="text" name="username" placeholder="Username" id="username" required="required" data-error="Please enter your user name.">
 </div>
+<div class="col-md-10 form-group">
+  <input type="text" name="firstname" placeholder="FirstName" id="firstname" required="required" data-error="Please enter your first name.">
+</div>
+<div class="col-md-10 form-group">
+  <input type="text" name="lastname" placeholder="LastName" id="lastname" required="required" data-error="Please enter your last name.">
+</div>
+<div class="col-md-10 form-group">
+  <input type="text" name="email" placeholder="Email" id="emailid" required="required" data-error="Please enter your email.">
+</div>
+<div class="col-md-10 form-group">
+  <input type="text" name="phonenumber" placeholder="Phonenumber" id="phonenumber">
+</div>
+<div class="col-md-10 form-group">
+  <input type="text" name="paypalid" placeholder="Paypal" id="paypalid" required="required" data-error="Please enter your paypal ID.">
+</div>
+
+
+<div class="col-md-10 form-group" align="center">
+  <button type="submit" class="btn"> Register</button>
+</div>
+<div class="col-md-10 form-group" align="center">
+  <button type="reset" class="btn btn-new"> <a href = "login">Cancel</a></button>
+</div>
+</p>
+</form>
+
+</div>
+
+
 </body>
 </html>

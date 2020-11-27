@@ -4,7 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -12,7 +12,8 @@
   <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update a User</title>
+<meta charset="UTF-8">
+<title>Rentals</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
@@ -23,13 +24,13 @@
   <div class="collapse navbar-collapse" id="target_collapse" >
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="findbooks">Home </a>
+        <a class="nav-link" href="findbooks"">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Update User</a>
+        <a class="nav-link" href="userupdate">Update User</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>">Rentals</a>
+        <a class="nav-link" href="#">Rentals</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="reviewcreate">Write Reviews</a>
@@ -51,19 +52,18 @@
     </ul>
   </div>
 </nav>
-	<h1>Update User Last Name</h1>
-	<form action="userupdate" method="post">
-		<p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="${fn:escapeXml(param.username)}">
-		</p>
-		<p>
-			<label for="lastname">LastName</label>
-			<input id="lastname" name="lastname" value="${fn:escapeXml(param.lastname)}">
-		</p>
-		<p>
-			<input type="submit">
-		</p>
-	</form>
+<h1>Rentals of User</h1>
+        <table border="1">
+            <tr>
+                <th>BookId</th>
+                <th>Timestamp</th>
+            </tr>
+            <c:forEach items="${rentals}" var="rental" >
+                <tr>
+                    <td><c:out value="${rental.getBook().getBookId()}" /></td>
+                    <td><c:out value="${rental.getCheckOutDate()}" /></td>
+                </tr>
+            </c:forEach>
+       </table>
 </body>
 </html>

@@ -85,7 +85,7 @@ public class RentalDao {
 			BookDao bookDao = BookDao.getInstance();
 			UserDao userDao = UserDao.getInstance();
 			while(results.next()) {
-				Date created = results.getDate("Created");
+				Date created = results.getDate("CheckOutDate");
 				Book book = bookDao.getBookById(results.getInt("BookId"));
 				User user = userDao.getUserByUserName(results.getString("UserName"));
 				Rental rental = new Rental(book, user, created);
@@ -130,7 +130,7 @@ public class RentalDao {
 			BookDao bookDao = BookDao.getInstance();
 			while(results.next()) {
 				while(results.next()) {
-					Date created =  new Date(results.getTimestamp("Created").getTime());
+					Date created =  new Date(results.getTimestamp("CheckOutDate").getTime());
 					User user = userDao.getUserByUserName(results.getString("UserName"));
 					Book book = bookDao.getBookById(results.getInt("BookId"));
 					Rental rental = new Rental(book, user, created);
