@@ -3,17 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+         pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
-  <link rel = "stylesheet" type = "text/css" href = "css/style.css">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta charset="UTF-8">
-<title>Rentals</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Delete a WishList</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
@@ -52,18 +51,24 @@
         </ul>
     </div>
 </nav>
-<h1>Rentals of User</h1>
-        <table border="1">
-            <tr>
-                <th>BookId</th>
-                <th>Timestamp</th>
-            </tr>
-            <c:forEach items="${rentals}" var="rental" >
-                <tr>
-                    <td><c:out value="${rental.getBook().getBookId()}" /></td>
-                    <td><c:out value="${rental.getCheckOutDate()}" /></td>
-                </tr>
-            </c:forEach>
-       </table>
+<h1>Please Re-enter the WishList Id </h1>
+<form action="WishListDelete.jsp" method="post">
+
+    <p>
+        <label for="username">UserName</label>
+        <input id="username" name="username" value="">
+    </p>
+    <p>
+        <label for="bookId">BookId</label>
+        <input id="bookId" name="bookId" value="">
+    </p>
+
+    <p>
+        <input type="submit">
+        <br/><br/><br/>
+        <span id="successMessage"><b>${messages.success}</b></span>
+    </p>
+</form>
+
 </body>
 </html>

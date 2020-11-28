@@ -16,40 +16,40 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
-  <a class="navbar-brand" href="#">YouBook</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="target_collapse" >
-    <ul class="nav navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="findbooks">Home </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Update User</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>">Rentals</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="reviewcreate">Write Reviews</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="wishlistcreate">Create Wishlist</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="findtopbooks">TopBooks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="userdelete">Delete User</a>
-      </li>
-    </ul>
-    <ul class ="nav navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="logout" style="color: white;">Logout</a>
-      </li>
-    </ul>
-  </div>
+    <a class="navbar-brand" href="#">YouBook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="target_collapse" >
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="findbooks">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="userupdate">Update User</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>">Rentals</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="WishListCreate.jsp">Create WishLists</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="WishListDelete.jsp">Delete Wishlist</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="findtopbooks">TopBooks</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="userdelete">Delete User</a>
+            </li>
+        </ul>
+        <ul class ="nav navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="logout" style="color: white;">Logout</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 	<h1>Update User Last Name</h1>
 	<form action="userupdate" method="post">

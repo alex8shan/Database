@@ -155,14 +155,14 @@ public class WishListDao {
 	 */
     public List<WishList> getWishListsByBookId(int bookId) throws SQLException {
         List<WishList> wishLists = new ArrayList<>();
-        String selectWishList = "SELECT WishListID,UserName,BookId FROM WishList WHERE BookId=?;";
+        String selectWishList = "SELECT WishListID,UserName,BookId FROM WishList WHERE UserName=? and BookId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectWishList);
-            selectStmt.setInt(1, bookId);
+            selectStmt.setInt(2, bookId);
             results = selectStmt.executeQuery();
             UserDao userDao = UserDao.getInstance();
     		BookDao bookDao = BookDao.getInstance();
@@ -189,7 +189,47 @@ public class WishListDao {
         }
         return wishLists;
     }
-    
+	
+	/**
+	 * Get the WishList based on
+	 * userName and bookId
+	 */
+	public WishList getWishListByUsernameAndBookId(String userName, int bookId) throws SQLException {
+		WishList wishList;
+		String selectWishList = "SELECT WishListID,UserName,BookId FROM WishList WHERE BookId=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectWishList);
+			selectStmt.setString(1, userName);
+			selectStmt.setInt(2, bookId);
+			results = selectStmt.executeQuery();
+			UserDao userDao = UserDao.getInstance();
+			BookDao bookDao = BookDao.getInstance();
+			int rstId = results.getInt("WishListID");
+			Book book = bookDao.getBookById(results.getInt("BookId"));
+			User user = userDao.getUserByUserName(results.getString("UserName"));
+			wishList = new WishList(rstId, book, user);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return wishList;
+	}
+	
 	/*
 	 * Delete the WishList instance.
 	 * This runs a DELETE statement

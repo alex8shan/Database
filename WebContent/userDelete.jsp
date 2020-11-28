@@ -11,6 +11,7 @@
 <title>Delete a user</title>
 </head>
 <body>
+
 <h1>Please Re-enter the username </h1>
 	<form action="userdelete" method="post">
 		
