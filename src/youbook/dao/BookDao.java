@@ -241,6 +241,46 @@ public class BookDao {
 		return bookList;
 	}
 	
+	//Method to get books by keywords
+	public List<Book> getBooksByKeywords(String bookTitle) throws SQLException {
+		String selectBooks =
+				"SELECT Book.BookId AS BookId, "
+						+ " Title, PublisherName, PublicationYear "
+						+ "FROM Book where Title like ?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		List<Book> bookList = new ArrayList<Book>();
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectBooks);
+			selectStmt.setString(1, "%"+bookTitle+"%");
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				int bookId = results.getInt("BookId");
+				String title = results.getString("Title");
+				String resultPublisherName = results.getString("PublisherName");
+				String resPublicationYear = results.getString("PublicationYear");
+				Book book = new Book(bookId, title,resultPublisherName, resPublicationYear );
+				bookList.add(book);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return bookList;
+	}
+	
 	/*
 	 * Get the Book records by fetching it from your MySQL instance.
 	 * This runs a SELECT statement and returns the first N (bookNum) books in database order by title (in alphabetical order).

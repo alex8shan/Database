@@ -1,8 +1,5 @@
 package youbook.servlet;
 
-import youbook.dao.*;
-import youbook.model.*;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,11 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.annotation.*;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import youbook.dao.BookDao;
+import youbook.model.Book;
 
 @WebServlet("/findbooks")
 public class FindBooks extends HttpServlet {
@@ -76,7 +76,7 @@ public class FindBooks extends HttpServlet {
         } else {
         	// Retrieve BlogUsers, and store as a message.
         	try {
-        		books = bookDao.getBooksByTitle(title);
+        		books = bookDao.getBooksByKeywords(title);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
