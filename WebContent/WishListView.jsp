@@ -24,30 +24,24 @@
   <div class="collapse navbar-collapse" id="target_collapse" >
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home </a>
+        <a class="nav-link" href="findtopbooks">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="userupdate">Update User</a>
+        <a class="nav-link" href="userupdate">User Info</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>" >Rentals</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="reviewcreate">Write Reviews</a>
+        <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="findtopbooks">TopBooks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="wishlistcreate">Create Wishlist</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="wishlistdelete">Delete Wishlist</a>
+        <a class="nav-link" href="findbooks">FindBooks</a>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="logout" style="color: white;">Logout</a>
+        <a class="nav-link" href="login" style="color: white;">Logout</a>
       </li>
     </ul>
   </div>
@@ -55,11 +49,13 @@
 <h1>WishList of User</h1>
         <table border="1">
             <tr>
-                <th>BookId</th>
+                <th>Book Title</th>
+                <th>Delete from WishList</th>
             </tr>
-            <c:forEach items="${wishlist}" var="wishlist" >
+            <c:forEach items="${wishlists}" var="wishlist" >
                 <tr>
-                    <td><c:out value="${wishlist.getBook().getBookId()}" /></td>
+                    <td><c:out value="${wishlist.getBook().getTitle()}" /></td>
+                    <td><a href="wishlistdelete?bookId=<c:out value="${wishlist.getBook().getBookId()}"/>&username=<c:out value="${username}"/>">Delete</a></td>
                 </tr>
             </c:forEach>
        </table>

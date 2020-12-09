@@ -31,38 +31,39 @@ public class showTopBooks extends HttpServlet {
 		// Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
+        List<Book> books = new ArrayList<Book>();
         //Just render the JSP.   
+        try {
+    		books = bookDao.getTopBooksByTitle(10);
+    		System.out.print(books);
+        } catch (SQLException e) {
+			e.printStackTrace();
+			throw new IOException(e);
+        }
+    	messages.put("success", "Displaying results for " + 10);
+        req.setAttribute("books", books);
+
         req.getRequestDispatcher("/showTopBooks.jsp").forward(req, resp);
 	}
 	
 	@Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
     		throws ServletException, IOException {
-        // Map for storing messages.
+		// Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-
         List<Book> books = new ArrayList<Book>();
-        
-        // Retrieve and validate name.
-        // title is retrieved from the form POST submission. By default, it
-        // is populated by the URL query string (in FindUsers.jsp).
-        String num = req.getParameter("num");
-        if (num == null || num.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid number.");
-        } else {
-        	// Retrieve BlogUsers, and store as a message.
-        	Integer number = Integer.parseInt(num);
-        	try {
-        		books = bookDao.getTopBooksByTitle(number);
-            } catch (SQLException e) {
-    			e.printStackTrace();
-    			throw new IOException(e);
-            }
-        	messages.put("success", "Displaying results for " + num);
+        //Just render the JSP.   
+        try {
+    		books = bookDao.getTopBooksByTitle(10);
+    		System.out.print(books);
+        } catch (SQLException e) {
+			e.printStackTrace();
+			throw new IOException(e);
         }
+    	messages.put("success", "Displaying results for " + 10);
         req.setAttribute("books", books);
-        
+
         req.getRequestDispatcher("/showTopBooks.jsp").forward(req, resp);
     }
 }

@@ -23,50 +23,38 @@
   <div class="collapse navbar-collapse" id="target_collapse" >
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home </a>
+        <a class="nav-link" href="findtopbooks">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="userupdate">Update User</a>
+        <a class="nav-link" href="userupdate">User Info</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>" >Rentals</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="reviewcreate">Write Reviews</a>
+        <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="findtopbooks">TopBooks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="wishlistview">Wishlist</a>
+        <a class="nav-link" href="findbooks">FindBooks</a>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="logout" style="color: white;">Logout</a>
+        <a class="nav-link" href="login" style="color: white;">Logout</a>
       </li>
     </ul>
   </div>
 </nav>
-	<form action="findtopbooks" method="post">
-		<h1>Show how many top book</h1>
-		<p>
-			<label for="num">number</label>
-			<input id="num" name="num" value="${fn:escapeXml(param.num)}">
-		</p>
-		<p>
-			<input type="submit">
-		</p>
-	</form>
-	<h1>Matching Books</h1>
+
+	<h1>Top 10 Books</h1>
         <table border="1">
             <tr>
                 <th>BookId</th>
                 <th>Title</th>
                 <th>Publisher Name</th>
                 <th>Publisher Year</th>
-                <th>DeleteWishlist</th>
-                <th>UpdateWishlist</th>
+                <th>Add to Wishlist</th>
+                <th>Rent this book</th>
             </tr>
             <c:forEach items="${books}" var="book" >
                 <tr>
@@ -74,8 +62,8 @@
                     <td><c:out value="${book.getTitle()}" /></td>
                     <td><c:out value="${book.getPublisherName()}" /></td>
                     <td><c:out value="${book.getPublicationYear()}" /></td>
-                    <td><a href="bookIddelete?bookId=<c:out value="${book.getBookId()}"/>">Delete</a></td>
-                    <td><a href="bookupdate?bookId=<c:out value="${book.getBookId()}"/>">Update</a></td>
+                    <td><a href="wishlistcreate?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Update</a></td>
+                    <td><a href="rentalcreate?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Rent</a></td>
                 </tr>
             </c:forEach>
        </table>
