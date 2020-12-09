@@ -14,25 +14,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login</title>
 </head>
-<body>
-<h2 align = "center" > YouBook Login </h2>
-	<div class="container login-container">
-        <div class="col-lg-4">
-            <form action="login" method="post">
-		<div class="form-group" align = "center">
-			<input id="username" name="username" placeholder="Username" class="form-control"  value="${fn:escapeXml(param.username)}">
+<body id ="login-cover">
+
+<form class="text-center" action="login" method="post">
+<p class="h4 mb-4" style="padding-top:50px;">YouBook Sign in</p>
+	<div class="md-8" align = "center">
+		<div class="form-group col-sm-4" align = "center">
+			<input id="username" name="username" placeholder="Username" class="form-control mb-4"  value="${fn:escapeXml(param.username)}">
 		</div>
 		
 		<div class="form-group" align = "center">
-        <button type="submit" class="btn-login btn">Login</button>
+        <button type="submit" class="btn btn-info btn-md">Login</button>
       </div>
       <div class="form-group" align = "center">
-        <button type="submit" class="btn btn-new"> <a href = "usercreate">Register </a></button>
+      <p>Not a member?
+       <a href = "usercreate">Register </a>
+       </p>
       </div>
-	</form>
-        </div>
-    </div>
-</div>
-	
+      </div>
+</form>
+
 </body>
 </html>
