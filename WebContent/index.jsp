@@ -7,46 +7,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
+  <link rel = "stylesheet" type = "text/css" href = "css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find a User</title>
+<title>Login</title>
 </head>
 <body>
-	<form action="findbooks" method="post">
-		<h1>Search for a Book by title</h1>
-		<p>
-			<label for="firstname">Title</label>
-			<input id="firstname" name="firstname" value="${fn:escapeXml(param.title)}">
-		</p>
-		<p>
-			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
-		</p>
+<h2 align = "center" > YouBook Login </h2>
+	<div class="container login-container">
+        <div class="col-lg-4">
+            <form action="login" method="post">
+		<div class="form-group" align = "center">
+			<input id="username" name="username" placeholder="Username" class="form-control"  value="${fn:escapeXml(param.username)}">
+		</div>
+		
+		<div class="form-group" align = "center">
+        <button type="submit" class="btn-login btn">Login</button>
+      </div>
+      <div class="form-group" align = "center">
+        <button type="submit" class="btn btn-new"> <a href = "usercreate">Register </a></button>
+      </div>
 	</form>
-	<br/>
-	<div id="wishlistCreate"><a href="wishlistcreate">CreateWishlist</a></div>
-	<div id=""><a href="findtopbooks">TopBooks</a></div>
-	<br/>
-	<h1>Matching Books</h1>
-        <table border="1">
-            <tr>
-                <th>BookId</th>
-                <th>Title</th>
-                <th>Publisher Name</th>
-                <th>Publisher Year</th>
-                <th>DeleteWishlist</th>
-                <th>UpdateWishlist</th>
-            </tr>
-            <c:forEach items="${books}" var="books" >
-                <tr>
-                    <td><c:out value="${book.getBookId()}" /></td>
-                    <td><c:out value="${book.getTitle()}" /></td>
-                    <td><c:out value="${book.getPublisherName()}" /></td>
-                    <td><c:out value="${book.getPublicationYear()}" /></td>
-                    <td><a href="bookIddelete?bookId=<c:out value="${book.getBookId()}"/>">Delete</a></td>
-                    <td><a href="bookupdate?bookId=<c:out value="${book.getBookId()}"/>">Update</a></td>
-                </tr>
-            </c:forEach>
-       </table>
+        </div>
+    </div>
+</div>
+	
 </body>
 </html>

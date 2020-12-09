@@ -29,19 +29,16 @@
         <a class="nav-link" href="userupdate">Update User</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>" style="color: white;">Rentals</a>
+        <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>" >Rentals</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="reviewcreate">Write Reviews</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="wishlistcreate">Create Wishlist</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="findtopbooks">TopBooks</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="userdelete">Delete User</a>
+        <a class="nav-link" href="wishlistview">Wishlist</a>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
@@ -82,8 +79,8 @@
                     <td><c:out value="${book.getPublisherName()}" /></td>
                     <td><c:out value="${book.getPublicationYear()}" /></td>
                     <td><c:out value="${username}" /></td>
-                    <td><a href="bookIddelete?bookId=<c:out value="${book.getBookId()}"/>">Delete</a></td>
-                    <td><a href="bookupdate?bookId=<c:out value="${book.getBookId()}"/>">Update</a></td>
+                    <td><a href="wishListdelete?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Delete</a></td>
+                    <td><a href="wishlistcreate?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Update</a></td>
                     <td><a href="rentalcreate?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Rent</a></td>
                 </tr>
             </c:forEach>

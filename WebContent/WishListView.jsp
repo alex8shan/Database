@@ -4,7 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -12,7 +12,8 @@
   <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a User</title>
+<meta charset="UTF-8">
+<title>Wishlists</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
@@ -38,7 +39,10 @@
         <a class="nav-link" href="findtopbooks">TopBooks</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="wishlistview">Wishlist</a>
+        <a class="nav-link" href="wishlistcreate">Create Wishlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="wishlistdelete">Delete Wishlist</a>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
@@ -48,27 +52,16 @@
     </ul>
   </div>
 </nav>
-	<h1>Create Review</h1>
-	<form action="reviewcreate" method="post">
-		<p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="">
-		</p>
-		<p>
-			<label for="bookId">BookId</label>
-			<input id="bookId" name="bookId" value="">
-		</p>
-		<p>
-			<label for="rating">Rating</label>
-			<input id="rating" name="rating" value="">
-		</p>
-		<p>
-			<label for="comment">Comment</label>
-			<input id="comment" name="comment" value="">
-		</p>
-		<p>
-			<input type="submit">
-		</p>
-	</form>
+<h1>WishList of User</h1>
+        <table border="1">
+            <tr>
+                <th>BookId</th>
+            </tr>
+            <c:forEach items="${wishlist}" var="wishlist" >
+                <tr>
+                    <td><c:out value="${wishlist.getBook().getBookId()}" /></td>
+                </tr>
+            </c:forEach>
+       </table>
 </body>
 </html>

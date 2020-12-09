@@ -1,6 +1,7 @@
 package youbook.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,17 +32,6 @@ public class WishListDelete extends HttpServlet {
 		// Map for storing messages.
 		Map<String, String> messages = new HashMap<String, String>();
 		req.setAttribute("messages", messages);
-		//Just render the JSP.
-		req.getRequestDispatcher("/WishListDelete.jsp").forward(req, resp);
-	}
-	
-	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// Map for storing messages.
-		Map<String, String> messages = new HashMap<String, String>();
-		req.setAttribute("messages", messages);
-		
 		String userName = req.getParameter("username");
 		String bookId = req.getParameter("bookId");
 		
@@ -68,6 +58,12 @@ public class WishListDelete extends HttpServlet {
 			}
 			
 		}
-		req.getRequestDispatcher("/WishListDelete.jsp").forward(req, resp);
+		//Just render the JSP.
+        req.getRequestDispatcher("/wishListView.jsp").forward(req, resp);
+	}
+	
+	@Override
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 	}
 }

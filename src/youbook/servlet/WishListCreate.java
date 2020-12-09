@@ -4,7 +4,10 @@ import youbook.dao.*;
 import youbook.model.*;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,9 +38,31 @@ public class WishListCreate extends HttpServlet {
 		// Map for storing messages.
 		Map<String, String> messages = new HashMap<String, String>();
 		req.setAttribute("messages", messages);
+        String userName = req.getParameter("username");
+        
+        if (userName == null || userName.trim().isEmpty()) {
+            messages.put("success", "Invalid UserName");
+        } else {
+        	// Create the BlogUser.
+        	int bookId = Integer.parseInt(req.getParameter("bookId"));
+        	
+        	try {
+        		long millis=System.currentTimeMillis();
+        		Date date = new Date(millis);
+        		User user = userDao.getUserByUserName(userName);
+        		Book book = bookDao.getBookById(bookId);
+				WishList wishList = new WishList(book, user);
+				wishList = wishListDao.create(wishList);
+        		messages.put("success", "Successfully created rental for " + userName);
+        	} catch (SQLException e) {
+        		e.printStackTrace();
+				throw new IOException(e);
+        	}
+	        messages.put("success", "Successfully created " + userName);
+        }
 		//Just render the JSP.
-		req.getRequestDispatcher("/WishListCreate.jsp").forward(req, resp);
-	}
+        req.getRequestDispatcher("/wishListView.jsp").forward(req, resp);
+    }
 	
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)

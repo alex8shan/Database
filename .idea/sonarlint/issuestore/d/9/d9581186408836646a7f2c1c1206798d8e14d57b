@@ -1,0 +1,16 @@
+
+A
+java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü
+M
+java:S1128"7Remove this unused import 'java.text.SimpleDateFormat'.(ú¡ÙÛ
+K
+java:S1128
+"5Remove this unused import 'java.text.ParseException'.(ñ®ï•
+G
+java:S1128	"1Remove this unused import 'java.text.DateFormat'.(÷Œá¼
+o
+java:S2293%"YReplace the type specification in this constructor call with the diamond operator ("<>").(áùÒý
+S
+java:S1854B"8Remove this useless assignment to local variable "user".(—ªŠöúÿÿÿÿ
+o
+java:S2293/"YReplace the type specification in this constructor call with the diamond operator ("<>").(áùÒý

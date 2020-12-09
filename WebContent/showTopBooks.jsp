@@ -12,44 +12,41 @@
   <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a User</title>
+<title>Show Top Books</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
-    <a class="navbar-brand" href="#">YouBook</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="target_collapse" >
-        <ul class="nav navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="findbooks">Home </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="userupdate">Update User</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>">Rentals</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="WishListCreate.jsp">Create WishLists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="WishListDelete.jsp">Delete Wishlist</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="findtopbooks">TopBooks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="userdelete">Delete User</a>
-            </li>
-        </ul>
-        <ul class ="nav navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="logout" style="color: white;">Logout</a>
-            </li>
-        </ul>
-    </div>
+  <a class="navbar-brand" href="#">YouBook</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="target_collapse" >
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="userupdate">Update User</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>" >Rentals</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="reviewcreate">Write Reviews</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="findtopbooks">TopBooks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="wishlistview">Wishlist</a>
+      </li>
+    </ul>
+    <ul class ="nav navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="logout" style="color: white;">Logout</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 	<form action="findtopbooks" method="post">
 		<h1>Show how many top book</h1>
