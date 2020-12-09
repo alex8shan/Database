@@ -1,5 +1,5 @@
 @charset "UTF-8";
- input {
+#username-login {
   margin-bottom: 10px;
   alignment: center;
   background: #ffffff;
@@ -30,4 +30,27 @@
 }
 .btn-new {
   background-color: skyblue;
+}
+
+.nav li {
+  display:inline-block;
+  list-style-type: none;
+}
+
+#login-cover {
+	background-image: url("img/login-3.jpeg");
+	background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+.input-group {
+	font-size: 14px !important;
+}
+
+.card {
+	margin-top: 75px;
+	margin-bottom: 75px;
+	margin-left: 75px;
+	margin-right: 75px;
 }
