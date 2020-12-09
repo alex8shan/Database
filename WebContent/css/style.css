@@ -31,3 +31,15 @@
 .btn-new {
   background-color: skyblue;
 }
+
+.nav li {
+  display:inline-block;
+  list-style-type: none;
+}
+
+#login-cover {
+	background-image: url("img/login-3.jpeg");
+	background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
