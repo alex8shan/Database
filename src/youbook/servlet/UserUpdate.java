@@ -30,7 +30,7 @@ public class UserUpdate extends HttpServlet {
 		Map<String, String> messages = new HashMap<String, String>();
 		req.setAttribute("messages", messages);
 		// Just render the JSP.
-		req.getRequestDispatcher("/userUpdate.jsp").forward(req, resp);
+		req.getRequestDispatcher("/UserUpdate.jsp").forward(req, resp);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class UserUpdate extends HttpServlet {
 		String userName = req.getParameter("username");
 		if (userName == null || userName.trim().isEmpty()) {
 			messages.put("success", "Invalid UserName");
-			req.getRequestDispatcher("/userUpdate.jsp").forward(req, resp);
+			req.getRequestDispatcher("/UserUpdate.jsp").forward(req, resp);
 		} else {
 			
 			try {
@@ -51,7 +51,7 @@ public class UserUpdate extends HttpServlet {
 				User user = userDao.getUserByUserName(userName);
 				if (user == null) {
 					messages.put("success", userName + " doesn't exist. Please try again.");
-					req.getRequestDispatcher("/userUpdate.jsp").forward(req, resp);
+					req.getRequestDispatcher("/UserUpdate.jsp").forward(req, resp);
 					
 				} else {
 					String lastName = req.getParameter("lastname");

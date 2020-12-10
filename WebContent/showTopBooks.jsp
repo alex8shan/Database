@@ -45,9 +45,20 @@
     </ul>
   </div>
 </nav>
-
-	<h1>Top 10 Books</h1>
-        <table border="1">
+<div class = "container">
+	<div class="page-header" style="padding-top: 20px">
+		<h1 class="text-center"> Welcome to YouBook!</h1>
+	</div>
+	<div class = "container" style="padding-bottom: 20px" >
+		<div style="padding-top: 20px"> YouBook is a Book Rental Service designed to help users discover the joy of reading at affordable prices. Users can easily pick the book of their choice from our enviable collection.</div>
+	</div>
+	<div>
+		<h4 class="text-center" style="padding-bottom: 20px">Top 10 Books</h4>
+	</div>
+	<div>
+		<h6 class="text-center" style="padding-bottom: 20px"> Here's top 10 books for you to get started with:  </h6>
+	</div>
+        <table class="table table-striped table-bordered table-hover table-condensed"">
             <tr>
                 <th>BookId</th>
                 <th>Title</th>
@@ -67,5 +78,6 @@
                 </tr>
             </c:forEach>
        </table>
+ </div>
 </body>
 </html>
