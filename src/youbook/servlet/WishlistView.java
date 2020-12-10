@@ -57,7 +57,7 @@ public class WishlistView extends HttpServlet{
 	        messages.put("success", "Successfully created " + userName);
         }
         //Just render the JSP. 
-        req.setAttribute("wishlist", wishlist);
+        req.setAttribute("wishlists", wishlist);
         req.getRequestDispatcher("/WishListView.jsp").forward(req, resp);
 	}
 	

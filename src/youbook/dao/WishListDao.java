@@ -149,54 +149,14 @@ public class WishListDao {
         return wishLists;
     }
 
-	/*
-	 * Get the WishList records by fetching it from your MySQL instance by the corresponding bookId.
-	 * This runs a SELECT statement and returns 0 or more WishList instance(s).
-	 */
-    public List<WishList> getWishListsByBookId(int bookId) throws SQLException {
-        List<WishList> wishLists = new ArrayList<>();
-        String selectWishList = "SELECT WishListID,UserName,BookId FROM WishList WHERE UserName=? and BookId=?;";
-        Connection connection = null;
-        PreparedStatement selectStmt = null;
-        ResultSet results = null;
-        try {
-            connection = connectionManager.getConnection();
-            selectStmt = connection.prepareStatement(selectWishList);
-            selectStmt.setInt(2, bookId);
-            results = selectStmt.executeQuery();
-            UserDao userDao = UserDao.getInstance();
-    		BookDao bookDao = BookDao.getInstance();
-            while(results.next()) {
-                int rstId = results.getInt("WishListID");
-                Book book = bookDao.getBookById(results.getInt("BookId"));
-                User user = userDao.getUserByUserName(results.getString("UserName"));
-                WishList wishList = new WishList(rstId, book, user);
-                wishLists.add(wishList);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if(connection != null) {
-                connection.close();
-            }
-            if(selectStmt != null) {
-                selectStmt.close();
-            }
-            if(results != null) {
-                results.close();
-            }
-        }
-        return wishLists;
-    }
 	
 	/**
 	 * Get the WishList based on
 	 * userName and bookId
 	 */
 	public WishList getWishListByUsernameAndBookId(String userName, int bookId) throws SQLException {
-		WishList wishList;
-		String selectWishList = "SELECT WishListID,UserName,BookId FROM WishList WHERE BookId=?;";
+		WishList wishList = null;
+		String selectWishList = "SELECT WishListID,UserName,BookId FROM WishList WHERE UserName=? and BookId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -208,10 +168,12 @@ public class WishListDao {
 			results = selectStmt.executeQuery();
 			UserDao userDao = UserDao.getInstance();
 			BookDao bookDao = BookDao.getInstance();
-			int rstId = results.getInt("WishListID");
-			Book book = bookDao.getBookById(results.getInt("BookId"));
-			User user = userDao.getUserByUserName(results.getString("UserName"));
-			wishList = new WishList(rstId, book, user);
+			while(results.next()) {
+				int rstId = results.getInt("WishListID");
+				Book book = bookDao.getBookById(results.getInt("BookId"));
+				User user = userDao.getUserByUserName(results.getString("UserName"));
+				wishList = new WishList(rstId, book, user);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

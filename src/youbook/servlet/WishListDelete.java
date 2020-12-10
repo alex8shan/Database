@@ -59,7 +59,7 @@ public class WishListDelete extends HttpServlet {
 			
 		}
 		//Just render the JSP.
-        req.getRequestDispatcher("/wishListView.jsp").forward(req, resp);
+        req.getRequestDispatcher("/wishlistview").forward(req, resp);
 	}
 	
 	@Override
