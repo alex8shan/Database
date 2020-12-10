@@ -16,7 +16,7 @@
 </head>
 <body style="background-color: gray">
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
-  <a class="navbar-brand" href="findtopbooks">YouBook</a>
+  <a class="navbar-brand" href="#">YouBook</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -33,6 +33,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="recommendation?username=<c:out value="${username}"/>">Recommendation</a>
       </li>
       <li class="nav-item">
       	 <form class="form-inline my-2 my-lg-0" action="findbooks" method="post" style="padding-left: 50px">

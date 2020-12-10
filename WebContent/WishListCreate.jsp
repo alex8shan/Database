@@ -16,40 +16,40 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
-    <a class="navbar-brand" href="#">YouBook</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="target_collapse" >
-        <ul class="nav navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="findbooks">Home </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="userupdate">Update User</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>">Rentals</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="WishListCreate.jsp">Create WishLists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="WishListDelete.jsp">Delete Wishlist</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="findtopbooks">TopBooks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="userdelete">Delete User</a>
-            </li>
-        </ul>
-        <ul class ="nav navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="logout" style="color: white;">Logout</a>
-            </li>
-        </ul>
-    </div>
+  <a class="navbar-brand" href="#">YouBook</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="target_collapse" >
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="findtopbooks">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="userupdate">User Info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>" >Rentals</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="recommendation?username=<c:out value="${username}"/>">Recommendation</a>
+      </li>
+      <li class="nav-item">
+      	 <form class="form-inline my-2 my-lg-0" action="findbooks" method="post" style="padding-left: 50px">
+			<input class="form-control mr-sm-2" id="firstname" name="firstname" placeholder="Search for title" value="${fn:escapeXml(param.title)}">
+			<button class="btn btn-outline-light btn-md my-2 my-sm-0" type="submit">Search</button>
+		</form>
+      </li>
+    </ul>
+    <ul class ="nav navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="login" style="color: white;">Logout</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 <h1>Create WishList</h1>
 <form action="WishListCreate.jsp" method="post">

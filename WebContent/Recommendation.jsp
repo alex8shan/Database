@@ -4,7 +4,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -12,10 +12,9 @@
   <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta charset="UTF-8">
-<title>Rentals</title>
+<title>Show Recommendations</title>
 </head>
-<body style="background-color: gray">
+<body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
   <a class="navbar-brand" href="#">YouBook</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
@@ -52,31 +51,33 @@
     </ul>
   </div>
 </nav>
-  <div class = "container">
-  <div class="card">
-	<h4 class="text-center" style="padding-top: 20px; padding-bottom: 20px">Rentals of User</h4>
-	<div style="padding-bottom: 50px">
-	<c:if test="${fn:length(rentals) > 0}">
-	<p class="text-center"> Check out your rental history </p>
-	
-        <table class="table table-bordered table-hover table-condensed" style="width: 400px; margin: 0px auto;">
+<div class = "container">
+	<div class="page-header" style="padding-top: 20px">
+		<h1 class="text-center">Recommendation based on your rental history</h1>
+	</div>
+	<div>
+		<h6 class="text-center" style="padding-bottom: 20px"> Here's top 10 books that might also interest you:  </h6>
+	</div>
+        <table class="table table-striped table-bordered table-hover table-condensed">
             <tr>
                 <th>BookId</th>
-                <th>Timestamp</th>
+                <th>Title</th>
+                <th>Publisher Name</th>
+                <th>Publisher Year</th>
+                <th>Add to Wishlist</th>
+                <th>Rent this book</th>
             </tr>
-            <c:forEach items="${rentals}" var="rental" >
+            <c:forEach items="${books}" var="book" >
                 <tr>
-                    <td><c:out value="${rental.getBook().getBookId()}" /></td>
-                    <td><c:out value="${rental.getCheckOutDate()}" /></td>
+                    <td><c:out value="${book.getBookId()}" /></td>
+                    <td><c:out value="${book.getTitle()}" /></td>
+                    <td><c:out value="${book.getPublisherName()}" /></td>
+                    <td><c:out value="${book.getPublicationYear()}" /></td>
+                    <td><a href="wishlistcreate?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Update</a></td>
+                    <td><a href="rentalcreate?bookId=<c:out value="${book.getBookId()}"/>&username=<c:out value="${username}"/>">Rent</a></td>
                 </tr>
             </c:forEach>
        </table>
-       </c:if>
-       <c:if test="${fn:length(rentals) == 0}"> 
-			<div class="text-center" style="padding-top: 20px; padding-bottom: 20px"> Oops... no rentals found. Rent something!</div>
-		</c:if>
-       </div>
-   </div>
-   </div>
+ </div>
 </body>
 </html>

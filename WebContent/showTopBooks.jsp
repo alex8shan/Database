@@ -35,6 +35,9 @@
         <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="recommendation?username=<c:out value="${username}"/>">Recommendation</a>
+      </li>
+      <li class="nav-item">
       	 <form class="form-inline my-2 my-lg-0" action="findbooks" method="post" style="padding-left: 50px">
 			<input class="form-control mr-sm-2" id="firstname" name="firstname" placeholder="Search for title" value="${fn:escapeXml(param.title)}">
 			<button class="btn btn-outline-light btn-md my-2 my-sm-0" type="submit">Search</button>
