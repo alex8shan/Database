@@ -31,9 +31,10 @@ protected BookDao bookDao;
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         List<Book> books = new ArrayList<Book>();
+        String userName=req.getParameter("username");
         //Just render the JSP.   
         try {
-    		books = bookDao.getTopBooksByTitle(10);
+    		books = bookDao.getRecommendations(userName);
     		System.out.print(books);
         } catch (SQLException e) {
 			e.printStackTrace();
@@ -52,9 +53,10 @@ protected BookDao bookDao;
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         List<Book> books = new ArrayList<Book>();
+        String userName=req.getParameter("username");
         //Just render the JSP.   
         try {
-    		books = bookDao.getTopBooksByTitle(10);
+    		books = bookDao.getRecommendations(userName);
     		System.out.print(books);
         } catch (SQLException e) {
 			e.printStackTrace();

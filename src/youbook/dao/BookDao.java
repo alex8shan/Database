@@ -198,6 +198,59 @@ public class BookDao {
 		return bookList;
 	}
 	
+	//Method to get recommendations
+	public List<Book> getRecommendations(String userName) throws SQLException {
+		String selectBooks =
+				"select Book.BookId AS BookId,Title, PublisherName, PublicationYear from book join \r\n"
+				+ "(select bookId from book where bookid in \r\n"
+				+ "(select distinct bookid from subjects where subjectmatter in \r\n"
+				+ "(select  subjectMatter from book join rental on rental.bookId=book.bookid   join subjects on subjects.bookid=book.bookId \r\n"
+				+ "where username= ? group by subjectmatter order by count(*) desc ) ) )as sub on sub.bookid=book.bookid join\r\n"
+				+ "\r\n"
+				+ "\r\n"
+				+ "(select bookId from book where bookid in \r\n"
+				+ "(select distinct bookid from subjects where subjectmatter in \r\n"
+				+ "(select subjectmatter from book join rental on rental.bookId=book.bookid  join author on author.bookid = book.bookid join subjects on subjects.bookid=book.bookId\r\n"
+				+ "where username=?) ) ) as auth on auth.bookid=book.bookid where book.bookid not in (select bookid from rental where username=?)";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		List<Book> bookList = new ArrayList<>();
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectBooks);
+			selectStmt.setString(1,userName);
+			selectStmt.setString(2,userName);
+			selectStmt.setString(3,userName);
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				int bookId = results.getInt("BookId");
+				String title = results.getString("Title");
+				String resultPublisherName = results.getString("PublisherName");
+				String resPublicationYear = results.getString("PublicationYear");
+				Book book = new Book(bookId, title, resultPublisherName, resPublicationYear );
+				bookList.add(book);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return bookList;
+	}
+	
 	/*
 	 * Get the Book records by fetching it from your MySQL instance by the corresponding title.
 	 * This runs a SELECT statement and returns 0 or more Book instance(s).

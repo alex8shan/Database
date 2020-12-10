@@ -53,10 +53,10 @@
 </nav>
 <div class = "container">
 	<div class="page-header" style="padding-top: 20px">
-		<h1 class="text-center">Recommendation based on your rental history</h1>
+		<h1 class="text-center">Recommendations</h1>
 	</div>
 	<div>
-		<h6 class="text-center" style="padding-bottom: 20px"> Here's top 10 books that might also interest you:  </h6>
+		<h6 class="text-center" style="padding-bottom: 20px"> Here are some recommendations we think you might like </h6>
 	</div>
         <table class="table table-striped table-bordered table-hover table-condensed">
             <tr>
