@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div class="form-group" align="center">
-  				<button type="submit" class="btn"> Register</button>
+  				<button type="submit" class="btn btn-register"> Register</button>
 			</div>
 			<div class="form-group" align="center">
   				<button type="reset" class="btn btn-new"> <a href = "login">Cancel</a></button>

@@ -15,9 +15,9 @@
 <meta charset="UTF-8">
 <title>Rentals</title>
 </head>
-<body>
+<body style="background-color: gray">
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
-  <a class="navbar-brand" href="#">YouBook</a>
+  <a class="navbar-brand" href="findtopbooks">YouBook</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -36,7 +36,10 @@
         <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="findbooks">FindBooks</a>
+      	 <form class="form-inline my-2 my-lg-0" action="findbooks" method="post" style="padding-left: 50px">
+			<input class="form-control mr-sm-2" id="firstname" name="firstname" placeholder="Search for title" value="${fn:escapeXml(param.title)}">
+			<button class="btn btn-outline-light btn-md my-2 my-sm-0" type="submit">Search</button>
+		</form>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
@@ -46,8 +49,14 @@
     </ul>
   </div>
 </nav>
-<h1>Rentals of User</h1>
-        <table border="1">
+  <div class = "container">
+  <div class="card">
+	<h4 class="text-center" style="padding-top: 20px; padding-bottom: 20px">Rentals of User</h4>
+	<div style="padding-bottom: 50px">
+	<c:if test="${fn:length(rentals) > 0}">
+	<p class="text-center"> Check out your rental history </p>
+	
+        <table class="table table-bordered table-hover table-condensed" style="width: 400px; margin: 0px auto;">
             <tr>
                 <th>BookId</th>
                 <th>Timestamp</th>
@@ -59,5 +68,12 @@
                 </tr>
             </c:forEach>
        </table>
+       </c:if>
+       <c:if test="${fn:length(rentals) == 0}"> 
+			<div class="text-center" style="padding-top: 20px; padding-bottom: 20px"> Oops... no rentals found. Rent something!</div>
+		</c:if>
+       </div>
+   </div>
+   </div>
 </body>
 </html>

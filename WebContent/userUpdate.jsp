@@ -14,9 +14,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Update a User</title>
 </head>
-<body>
+<body style="background-color: gray">
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
-  <a class="navbar-brand" href="#">YouBook</a>
+  <a class="navbar-brand" href="findtopbooks">YouBook</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#target_collapse">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -35,7 +35,10 @@
         <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="findbooks">FindBooks</a>
+      	 <form class="form-inline my-2 my-lg-0" action="findbooks" method="post" style="padding-left: 50px">
+			<input class="form-control mr-sm-2" id="firstname" name="firstname" placeholder="Search for title" value="${fn:escapeXml(param.title)}">
+			<button class="btn btn-outline-light btn-md my-2 my-sm-0" type="submit">Search</button>
+		</form>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
@@ -45,35 +48,53 @@
     </ul>
   </div>
 </nav>
-	<h1>Update User Last Name</h1>
-	<form action="userupdate" method="post">
-		<p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="${fn:escapeXml(param.username)}">
-		</p>
-		<p>
-			<label for="lastname">LastName</label>
-			<input id="lastname" name="lastname" value="${fn:escapeXml(param.lastname)}">
-		</p>
-		<p>
-			<label for="firstname">FirstName</label>
-			<input id="firstname" name="firstname" value="${fn:escapeXml(param.firstname)}">
-		</p>
-		<p>
-			<label for="email">Email</label>
-			<input id="email" name="email" value="${fn:escapeXml(param.email)}">
-		</p>
-		<p>
-			<label for="phonenumber">PhoneNumber</label>
-			<input id="phonenumber" name="phonenumber" value="${fn:escapeXml(param.phonenumber)}">
-		</p>
-		<p>
-			<label for="paypal">Paypal</label>
-			<input id="paypal" name="paypal" value="${fn:escapeXml(param.paypal)}">
-		</p>
-		<p>
-			<input type="submit">
-		</p>
+<div class="container">
+	<div class="card">
+      <article class="card-body mx-auto">
+      	<h4 class="card-title mt-3 text-center">Update User Information</h4>
+		<form action="userupdate" method="post">
+			<div class="form-group input-group input-group-lg">
+					<div class="input-group-prepend">
+		    			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 			</div>
+				  <input type="text" name="username" placeholder="Username" id="username" required="required" data-error="Please enter your user name." style="width: 300px">
+				</div>
+				<div class="form-group input-group input-group-lg">
+					<div class="input-group-prepend">
+		    			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 			</div>
+				  <input type="text" name="firstname" placeholder="FirstName" id="firstname" required="required" data-error="Please enter your first name." style="width: 300px">
+				</div>
+				<div class="form-group input-group input-group-lg">
+					<div class="input-group-prepend">
+		    			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 			</div>
+				  <input type="text" name="lastname" placeholder="LastName" id="lastname" required="required" data-error="Please enter your last name." style="width: 300px">
+				</div>
+				<div class="form-group input-group input-group-lg">
+    				<div class="input-group-prepend">
+		    			<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 			</div>
+  					<input type="text" name="email" placeholder="Email" id="emailid" required="required" data-error="Please enter your email." style="width: 300px">
+				</div>
+			<div class="form-group input-group input-group-lg">
+    			<div class="input-group-prepend">
+		    		<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+				</div>
+  				<input type="text" name="phonenumber" placeholder="Phonenumber" id="phonenumber" style="width: 300px">
+			</div>
+			<div class="form-group input-group input-group-lg">
+    			<div class="input-group-prepend">
+					<span class="input-group-text"><i class="fab fa-paypal"></i></span>
+  						<input type="text" name="paypalid" placeholder="Paypal" id="paypalid" required="required" data-error="Please enter your paypal ID." style="width: 300px">
+				</div>
+			</div>
+			<div class="form-group" align="center">
+  				<button type="submit" class="btn"> Submit</button>
+			</div>
 	</form>
+	</article>
+	</div>
+	</div>
 </body>
 </html>

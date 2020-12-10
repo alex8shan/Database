@@ -35,7 +35,10 @@
         <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="findbooks">FindBooks</a>
+      	 <form class="form-inline my-2 my-lg-0" action="findbooks" method="post" style="padding-left: 50px">
+			<input class="form-control mr-sm-2" id="firstname" name="firstname" placeholder="Search for title" value="${fn:escapeXml(param.title)}">
+			<button class="btn btn-outline-light btn-md my-2 my-sm-0" type="submit">Search</button>
+		</form>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
@@ -58,7 +61,7 @@
 	<div>
 		<h6 class="text-center" style="padding-bottom: 20px"> Here's top 10 books for you to get started with:  </h6>
 	</div>
-        <table class="table table-striped table-bordered table-hover table-condensed"">
+        <table class="table table-striped table-bordered table-hover table-condensed">
             <tr>
                 <th>BookId</th>
                 <th>Title</th>

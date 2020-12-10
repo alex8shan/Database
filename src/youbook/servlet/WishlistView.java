@@ -48,7 +48,6 @@ public class WishlistView extends HttpServlet{
         } else { 	
         	try {
         		wishlist = wishlistDao.getWishListsByUserName(userName);
-        		System.out.println(wishlist.get(0).getBook().getTitle());
         		messages.put("success", "Successfully created rental for " + userName);
         	} catch (SQLException e) {
         		e.printStackTrace();

@@ -24,7 +24,7 @@
 		</div>
 		
 		<div class="form-group" align = "center">
-        <button type="submit" class="btn btn-info btn-md">Login</button>
+        <button type="submit" class="btn btn-register btn-info btn-md">Login</button>
       </div>
       <div class="form-group" align = "center">
       <p>Not a member?

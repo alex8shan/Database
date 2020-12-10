@@ -57,7 +57,6 @@ public class RentalView extends HttpServlet {
         		Date date = new Date(millis);
         		
         		rentals = rentalDao.getRentalsByUserName(userName);
-        		System.out.println(rentals.get(0).getBook().getTitle());
         		messages.put("success", "Successfully created rental for " + userName);
         	} catch (SQLException e) {
         		e.printStackTrace();
