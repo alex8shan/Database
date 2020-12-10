@@ -68,6 +68,110 @@ public class UserDao extends PersonDao {
 		return user;
 	}
 	
+	/**
+	 * Update the FirstName of the User instance.
+	 * This runs a UPDATE statement.
+	 */
+	public User updateFirstName(User user, String newFirstName) throws SQLException {
+		// The field to update only exists in the superclass table, so we can
+		// just call the superclass method.
+		super.updateFirstName(user, newFirstName);
+		return user;
+	}
+	
+	/**
+	 * Update the Email of the User instance.
+	 * This runs a UPDATE statement.
+	 */
+	public User updateEmail(User user, String newEmail) throws SQLException {
+		String updatePerson = "UPDATE User SET EmailAddress=? WHERE UserName=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updatePerson);
+			updateStmt.setString(1, newEmail);
+			updateStmt.setString(2, user.getUserName());
+			updateStmt.executeUpdate();
+			
+			// Update the person param before returning to the caller.
+			user.setEmailAddress(newEmail);
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
+	/**
+	 * Update the PhoneNumber of the User instance.
+	 * This runs a UPDATE statement.
+	 */
+	public User updatePhoneNumber(User user, String newPhoneNumber) throws SQLException {
+		String updatePerson = "UPDATE User SET PhoneNumber=? WHERE UserName=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updatePerson);
+			updateStmt.setString(1, newPhoneNumber);
+			updateStmt.setString(2, user.getUserName());
+			updateStmt.executeUpdate();
+			
+			// Update the person param before returning to the caller.
+			user.setPhoneNumber(newPhoneNumber);
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
+	/**
+	 * Update the Paypal of the User instance.
+	 * This runs a UPDATE statement.
+	 */
+	public User updatePaypal(User user, String newPaypal) throws SQLException {
+		String updatePerson = "UPDATE User SET PaypalId=? WHERE UserName=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updatePerson);
+			updateStmt.setString(1, newPaypal);
+			updateStmt.setString(2, user.getUserName());
+			updateStmt.executeUpdate();
+			
+			// Update the person param before returning to the caller.
+			user.setPaypalID(newPaypal);
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
 	/*
 	 * Get the User record by fetching it from your MySQL instance.
 	 * This runs a SELECT statement and returns a single User instance.

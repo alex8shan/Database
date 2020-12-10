@@ -90,6 +90,37 @@ public class PersonDao {
 		}
 	}
 	
+	/**
+	 * Update the FirstName of the Person instance.
+	 * This runs an UPDATE statement.
+	 */
+	public Person updateFirstName(Person person, String newFirstName) throws SQLException {
+		String updatePerson = "UPDATE Person SET FirstName=? WHERE UserName=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updatePerson);
+			updateStmt.setString(1, newFirstName);
+			updateStmt.setString(2, person.getUserName());
+			updateStmt.executeUpdate();
+			
+			// Update the person param before returning to the caller.
+			person.setFirstName(newFirstName);
+			return person;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+	
 	
 	/**
 	 * Get the Person record by fetching it from your MySQL instance.

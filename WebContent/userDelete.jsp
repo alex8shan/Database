@@ -12,7 +12,7 @@
   <script src="https://kit.fontawesome.com/c0c58502d4.js" crossorigin="anonymous"></script>
   <link rel = "stylesheet" type = "text/css" href = "css/style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update a User</title>
+<title>Delete a user</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: maroon;">
@@ -23,57 +23,46 @@
   <div class="collapse navbar-collapse" id="target_collapse" >
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="findtopbooks">Home </a>
+        <a class="nav-link" href="#">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="userupdate">User Info</a>
+        <a class="nav-link" href="userupdate">Update User</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="rentalview?username=<c:out value="${username}"/>" >Rentals</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="wishlistview?username=<c:out value="${username}"/>">Wishlist</a>
+        <a class="nav-link" href="reviewcreate">Write Reviews</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="findbooks">FindBooks</a>
+        <a class="nav-link" href="findtopbooks">TopBooks</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="wishlistview">Wishlist</a>
       </li>
     </ul>
     <ul class ="nav navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="login" style="color: white;">Logout</a>
+        <a class="nav-link" href="logout" style="color: white;">Logout</a>
       </li>
     </ul>
   </div>
 </nav>
-	<h1>Update User Last Name</h1>
-	<form action="userupdate" method="post">
+
+<h1>Please Re-enter the username </h1>
+	<form action="userdelete" method="post">
+		
 		<p>
 			<label for="username">UserName</label>
 			<input id="username" name="username" value="${fn:escapeXml(param.username)}">
 		</p>
-		<p>
-			<label for="lastname">LastName</label>
-			<input id="lastname" name="lastname" value="${fn:escapeXml(param.lastname)}">
-		</p>
-		<p>
-			<label for="firstname">FirstName</label>
-			<input id="firstname" name="firstname" value="${fn:escapeXml(param.firstname)}">
-		</p>
-		<p>
-			<label for="email">Email</label>
-			<input id="email" name="email" value="${fn:escapeXml(param.email)}">
-		</p>
-		<p>
-			<label for="phonenumber">PhoneNumber</label>
-			<input id="phonenumber" name="phonenumber" value="${fn:escapeXml(param.phonenumber)}">
-		</p>
-		<p>
-			<label for="paypal">Paypal</label>
-			<input id="paypal" name="paypal" value="${fn:escapeXml(param.paypal)}">
-		</p>
+		
 		<p>
 			<input type="submit">
+			<br/><br/><br/>
+			<span id="successMessage"><b>${messages.success}</b></span>
 		</p>
 	</form>
+	
 </body>
 </html>
