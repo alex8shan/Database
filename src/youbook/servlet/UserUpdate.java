@@ -59,19 +59,20 @@ public class UserUpdate extends HttpServlet {
 					String email = req.getParameter("email");
 					String phoneNumber = req.getParameter("phonenumber");
 					String paypal = req.getParameter("paypal");
-					if (lastName != null) {
+					if (lastName != null && !lastName.trim().isEmpty()) {
 						user = userDao.updateLastName(user, lastName);						
 					}
-					if (firstName != null) {
+					if (firstName != null && !firstName.trim().isEmpty()) {
+						System.out.print("firstName " + firstName);
 						user = userDao.updateFirstName(user, firstName);						
 					}
-					if (email != null) {
+					if (email != null && !email.trim().isEmpty()) {
 						user = userDao.updateEmail(user, email);						
 					}
-					if (phoneNumber != null) {
+					if (phoneNumber != null && !phoneNumber.trim().isEmpty()) {
 						user = userDao.updatePhoneNumber(user, phoneNumber);						
 					}
-					if (paypal != null) {
+					if (paypal != null && !paypal.trim().isEmpty()) {
 						user = userDao.updatePaypal(user, paypal);						
 					}
 					messages.put("success", "Successfully updated " + userName);
