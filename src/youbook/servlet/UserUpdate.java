@@ -55,7 +55,25 @@ public class UserUpdate extends HttpServlet {
 					
 				} else {
 					String lastName = req.getParameter("lastname");
-					user = userDao.updateLastName(user, lastName);
+					String firstName = req.getParameter("firstname");
+					String email = req.getParameter("email");
+					String phoneNumber = req.getParameter("phonenumber");
+					String paypal = req.getParameter("paypal");
+					if (lastName != null) {
+						user = userDao.updateLastName(user, lastName);						
+					}
+					if (firstName != null) {
+						user = userDao.updateFirstName(user, firstName);						
+					}
+					if (email != null) {
+						user = userDao.updateEmail(user, email);						
+					}
+					if (phoneNumber != null) {
+						user = userDao.updatePhoneNumber(user, phoneNumber);						
+					}
+					if (paypal != null) {
+						user = userDao.updatePaypal(user, paypal);						
+					}
 					messages.put("success", "Successfully updated " + userName);
 					req.getRequestDispatcher("/FindBooks.jsp").forward(req, resp);
 				}
