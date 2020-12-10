@@ -76,7 +76,7 @@ public class UserUpdate extends HttpServlet {
 						user = userDao.updatePaypal(user, paypal);						
 					}
 					messages.put("success", "Successfully updated " + userName);
-					req.getRequestDispatcher("/FindBooks.jsp").forward(req, resp);
+					req.getRequestDispatcher("/findtopbooks").forward(req, resp);
 				}
 
 			} catch (SQLException e) {

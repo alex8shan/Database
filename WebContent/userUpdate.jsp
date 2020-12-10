@@ -63,19 +63,19 @@
 					<div class="input-group-prepend">
 		    			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		 			</div>
-				  <input type="text" name="firstname" placeholder="FirstName" id="firstname" required="required" data-error="Please enter your first name." style="width: 300px">
+				  <input type="text" name="firstname" placeholder="FirstName" id="firstname"  data-error="Please enter your first name." style="width: 300px">
 				</div>
 				<div class="form-group input-group input-group-lg">
 					<div class="input-group-prepend">
 		    			<span class="input-group-text"> <i class="fa fa-user"></i> </span>
 		 			</div>
-				  <input type="text" name="lastname" placeholder="LastName" id="lastname" required="required" data-error="Please enter your last name." style="width: 300px">
+				  <input type="text" name="lastname" placeholder="LastName" id="lastname"  data-error="Please enter your last name." style="width: 300px">
 				</div>
 				<div class="form-group input-group input-group-lg">
     				<div class="input-group-prepend">
 		    			<span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
 		 			</div>
-  					<input type="text" name="email" placeholder="Email" id="emailid" required="required" data-error="Please enter your email." style="width: 300px">
+  					<input type="text" name="email" placeholder="Email" id="emailid"  data-error="Please enter your email." style="width: 300px">
 				</div>
 			<div class="form-group input-group input-group-lg">
     			<div class="input-group-prepend">
@@ -86,7 +86,7 @@
 			<div class="form-group input-group input-group-lg">
     			<div class="input-group-prepend">
 					<span class="input-group-text"><i class="fab fa-paypal"></i></span>
-  						<input type="text" name="paypalid" placeholder="Paypal" id="paypalid" required="required" data-error="Please enter your paypal ID." style="width: 300px">
+  						<input type="text" name="paypalid" placeholder="Paypal" id="paypalid"  data-error="Please enter your paypal ID." style="width: 300px">
 				</div>
 			</div>
 			<div class="form-group" align="center">

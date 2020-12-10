@@ -1,7 +1,6 @@
 package youbook.servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import youbook.dao.*;
-import youbook.model.*;
+import youbook.dao.WishListDao;
+import youbook.model.WishList;
 
 
 @WebServlet("/wishlistdelete")
