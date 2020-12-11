@@ -202,16 +202,14 @@ public class BookDao {
 	public List<Book> getRecommendations(String userName) throws SQLException {
 		String selectBooks =
 				"select Book.BookId AS BookId,Title, PublisherName, PublicationYear from book join \r\n"
-				+ "(select bookId from book where bookid in \r\n"
-				+ "(select distinct bookid from subjects where subjectmatter in \r\n"
-				+ "(select  subjectMatter from book join rental on rental.bookId=book.bookid   join subjects on subjects.bookid=book.bookId \r\n"
-				+ "where username= ? group by subjectmatter order by count(*) desc ) ) )as sub on sub.bookid=book.bookid join\r\n"
-				+ "\r\n"
-				+ "\r\n"
-				+ "(select bookId from book where bookid in \r\n"
-				+ "(select distinct bookid from subjects where subjectmatter in \r\n"
-				+ "(select subjectmatter from book join rental on rental.bookId=book.bookid  join author on author.bookid = book.bookid join subjects on subjects.bookid=book.bookId\r\n"
-				+ "where username=?) ) ) as auth on auth.bookid=book.bookid where book.bookid not in (select bookid from rental where username=?)";
+				+ "				 (select distinct bookid from subjects where subjectmatter in \r\n"
+				+ "				 (select distinct subjectMatter from book join rental on rental.bookId=book.bookid   join subjects on subjects.bookid=book.bookId \r\n"
+				+ "				 where username= ? group by subjectmatter order by count(*) desc )  )as sub on sub.bookid=book.bookid join\r\n"
+				+ "				 			 \r\n"
+				+ "				 (select distinct bookid from author where Name in \r\n"
+				+ "				 (select author.Name from  rental join author on author.bookid = rental.bookid \r\n"
+				+ "				 where username=? group by name order by count(*) desc) )  as auth on auth.bookid=book.bookid "
+				+ "				where book.bookid not in (select bookid from rental where username=?);";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
